@@ -1,1361 +1,2223 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Fundamentals of Mechanical Engineering</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"/>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
-<style>
-  :root {
-    --cream: #fdf6ec;
-    --paper: #fffdf8;
-    --ink: #1a1209;
-    --ink-light: #3d2e1a;
-    --amber: #d97706;
-    --amber-light: #fef3c7;
-    --amber-mid: #fde68a;
-    --rust: #b45309;
-    --red-eng: #dc2626;
-    --red-light: #fef2f2;
-    --blue-eng: #1d4ed8;
-    --blue-light: #eff6ff;
-    --blue-mid: #bfdbfe;
-    --green-eng: #15803d;
-    --green-light: #f0fdf4;
-    --green-mid: #bbf7d0;
-    --purple-eng: #7c3aed;
-    --purple-light: #f5f3ff;
-    --border: #e5d5b0;
-    --shadow: rgba(180, 83, 9, 0.12);
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fundamentals of Mechanical Engineering</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+  <style>
+    :root {
+      --cream: #fdf6ec;
+      --paper: #fffdf8;
+      --ink: #1a1209;
+      --ink-light: #3d2e1a;
+      --amber: #d97706;
+      --amber-light: #fef3c7;
+      --amber-mid: #fde68a;
+      --rust: #b45309;
+      --red-eng: #dc2626;
+      --red-light: #fef2f2;
+      --blue-eng: #1d4ed8;
+      --blue-light: #eff6ff;
+      --blue-mid: #bfdbfe;
+      --green-eng: #15803d;
+      --green-light: #f0fdf4;
+      --green-mid: #bbf7d0;
+      --purple-eng: #7c3aed;
+      --purple-light: #f5f3ff;
+      --border: #e5d5b0;
+      --shadow: rgba(180, 83, 9, 0.12);
+    }
 
-  * { margin:0; padding:0; box-sizing:border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  body {
-    font-family: 'Source Serif 4', Georgia, serif;
-    background: var(--cream);
-    color: var(--ink);
-    line-height: 1.75;
-    font-size: 15px;
-  }
+    body {
+      font-family: 'Source Serif 4', Georgia, serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.75;
+      font-size: 15px;
+    }
 
-  /* ── HEADER ── */
-  header {
-    background: linear-gradient(135deg, #1a0a00 0%, #3b1f00 40%, #5c2d00 100%);
-    color: #fff;
-    padding: 48px 40px 36px;
-    position: relative;
-    overflow: hidden;
-  }
-  header::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(255,255,255,0.015) 30px, rgba(255,255,255,0.015) 60px);
-  }
-  header::after {
-    content: '⚙';
-    position: absolute; right: 40px; top: 20px;
-    font-size: 140px; opacity: 0.06; line-height:1;
-    animation: spin 40s linear infinite;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
+    /* ── HEADER ── */
+    header {
+      background: linear-gradient(135deg, #1a0a00 0%, #3b1f00 40%, #5c2d00 100%);
+      color: #fff;
+      padding: 48px 40px 36px;
+      position: relative;
+      overflow: hidden;
+    }
 
-  .header-tag {
-    display: inline-block;
-    background: rgba(217,119,6,0.35);
-    color: #fde68a;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; letter-spacing: 2px;
-    padding: 3px 10px; border-radius: 2px;
-    margin-bottom: 14px;
-  }
-  header h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(28px, 4vw, 48px);
-    font-weight: 900;
-    line-height: 1.1;
-    color: #fff;
-    position: relative;
-  }
-  header h1 span { color: #fbbf24; }
-  .header-sub {
-    color: #d6b896;
-    font-size: 14px;
-    margin-top: 10px;
-    font-style: italic;
-  }
-  .section-badges {
-    display: flex; flex-wrap: wrap; gap: 10px;
-    margin-top: 22px; position: relative;
-  }
-  .badge {
-    padding: 5px 14px; border-radius: 20px;
-    font-size: 12px; font-family: 'JetBrains Mono', monospace;
-    border: 1px solid;
-  }
-  .badge-a { background: rgba(217,119,6,0.25); color: #fde68a; border-color: rgba(251,191,36,0.3); }
-  .badge-b { background: rgba(29,78,216,0.25); color: #bfdbfe; border-color: rgba(147,197,253,0.3); }
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(255, 255, 255, 0.015) 30px, rgba(255, 255, 255, 0.015) 60px);
+    }
 
-  /* ── NAV ── */
-  nav {
-    background: var(--paper);
-    border-bottom: 2px solid var(--border);
-    padding: 0 40px;
-    display: flex; flex-wrap: wrap; gap: 0;
-    position: sticky; top: 0; z-index: 100;
-    box-shadow: 0 2px 12px var(--shadow);
-  }
-  nav a {
-    padding: 13px 16px;
-    font-size: 12px; font-family: 'JetBrains Mono', monospace;
-    color: var(--ink-light); text-decoration: none;
-    border-bottom: 3px solid transparent;
-    transition: all 0.2s;
-    white-space: nowrap;
-  }
-  nav a:hover { color: var(--amber); border-bottom-color: var(--amber); }
+    header::after {
+      content: '⚙';
+      position: absolute;
+      right: 40px;
+      top: 20px;
+      font-size: 140px;
+      opacity: 0.06;
+      line-height: 1;
+      animation: spin 40s linear infinite;
+    }
 
-  /* ── LAYOUT ── */
-  .container { max-width: 1100px; margin: 0 auto; padding: 40px 32px; }
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
 
-  /* ── SECTION TITLES ── */
-  .section-header {
-    display: flex; align-items: center; gap: 14px;
-    margin: 52px 0 28px;
-    padding-bottom: 14px;
-    border-bottom: 2px solid var(--border);
-    position: relative;
-  }
-  .section-header::before {
-    content: '';
-    position: absolute; bottom: -2px; left: 0;
-    width: 60px; height: 2px;
-    background: var(--amber);
-  }
-  .section-icon {
-    width: 40px; height: 40px;
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px; flex-shrink: 0;
-  }
-  .icon-amber { background: var(--amber-light); }
-  .icon-blue  { background: var(--blue-light); }
-  .icon-green { background: var(--green-light); }
-  .icon-red   { background: var(--red-light); }
-  .icon-purple{ background: var(--purple-light); }
+    .header-tag {
+      display: inline-block;
+      background: rgba(217, 119, 6, 0.35);
+      color: #fde68a;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 2px;
+      padding: 3px 10px;
+      border-radius: 2px;
+      margin-bottom: 14px;
+    }
 
-  .section-header h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px; font-weight: 700;
-    color: var(--ink);
-  }
-  .section-header .sub {
-    font-size: 13px; color: #6b5a3e;
-    font-style: italic; margin-top: 2px;
-  }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 900;
+      line-height: 1.1;
+      color: #fff;
+      position: relative;
+    }
 
-  /* ── CARDS ── */
-  .card {
-    background: var(--paper);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 24px 26px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 8px var(--shadow);
-    transition: box-shadow 0.2s;
-  }
-  .card:hover { box-shadow: 0 4px 18px var(--shadow); }
-  .card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 17px; font-weight: 700;
-    margin-bottom: 12px; color: var(--ink);
-    display: flex; align-items: center; gap: 8px;
-  }
-  .card h4 {
-    font-size: 14px; font-weight: 600;
-    color: var(--rust); margin: 14px 0 6px;
-    font-family: 'JetBrains Mono', monospace;
-    text-transform: uppercase; letter-spacing: 0.5px;
-  }
-  .card p { color: var(--ink-light); margin-bottom: 8px; }
+    header h1 span {
+      color: #fbbf24;
+    }
 
-  /* ── GRID ── */
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
-  @media(max-width:700px) { .grid-2,.grid-3 { grid-template-columns:1fr; } }
+    .header-sub {
+      color: #d6b896;
+      font-size: 14px;
+      margin-top: 10px;
+      font-style: italic;
+    }
 
-  /* ── FORMULA BOX ── */
-  .formula-box {
-    background: linear-gradient(135deg, #fffbf0, #fef9ec);
-    border: 1.5px solid #f0d080;
-    border-radius: 8px;
-    padding: 14px 18px;
-    margin: 10px 0;
-    text-align: center;
-  }
-  .formula-box.blue {
-    background: linear-gradient(135deg, #f0f7ff, #e8f2ff);
-    border-color: #93c5fd;
-  }
-  .formula-box.green {
-    background: linear-gradient(135deg, #f0fff4, #e8fef0);
-    border-color: #6ee7b7;
-  }
-  .formula-box.red {
-    background: linear-gradient(135deg, #fff5f5, #fef0f0);
-    border-color: #fca5a5;
-  }
-  .formula-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px; letter-spacing: 1.5px;
-    color: #92763c; margin-bottom: 6px;
-    text-transform: uppercase;
-  }
-  .formula-label.blue { color: #3b82f6; }
-  .formula-label.green { color: #16a34a; }
-  .formula-label.red { color: #dc2626; }
+    .section-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+      position: relative;
+    }
 
-  /* ── PV TABLE ── */
-  .pv-table {
-    width: 100%; border-collapse: collapse;
-    font-size: 13.5px; margin: 14px 0;
-    border-radius: 8px; overflow: hidden;
-    box-shadow: 0 1px 6px var(--shadow);
-  }
-  .pv-table thead tr {
-    background: #1a0a00; color: #fde68a;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; letter-spacing: 0.8px; text-transform: uppercase;
-  }
-  .pv-table th { padding: 11px 14px; text-align: left; font-weight: 600; }
-  .pv-table td { padding: 11px 14px; border-bottom: 1px solid #f0e0c0; }
-  .pv-table tbody tr:nth-child(odd)  { background: #fffdf8; }
-  .pv-table tbody tr:nth-child(even) { background: #fdf6ec; }
-  .pv-table tbody tr:last-child td   { border-bottom: none; }
-  .pv-table .step-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 600; color: var(--rust);
-    font-size: 12px;
-  }
-  .pv-table .process-name {
-    font-weight: 600; color: var(--ink);
-  }
-  .pv-table .otto-col { color: #b45309; }
-  .pv-table .diesel-col { color: #1d4ed8; }
+    .badge {
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      border: 1px solid;
+    }
 
-  /* ── STROKE TIMELINE ── */
-  .stroke-timeline {
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    gap: 12px; margin: 14px 0;
-  }
-  @media(max-width:600px) { .stroke-timeline { grid-template-columns: 1fr 1fr; } }
-  .stroke-item {
-    background: var(--paper);
-    border: 1px solid var(--border);
-    border-radius: 8px; padding: 14px 12px;
-    text-align: center; position: relative;
-  }
-  .stroke-item::before {
-    content: attr(data-num);
-    position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
-    background: var(--amber); color: #fff;
-    width: 22px; height: 22px; border-radius: 50%;
-    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  }
-  .stroke-icon { font-size: 28px; margin: 8px 0 6px; }
-  .stroke-name { font-weight: 600; font-size: 13px; color: var(--ink); }
-  .stroke-desc { font-size: 12px; color: #6b5a3e; margin-top: 4px; line-height: 1.4; }
+    .badge-a {
+      background: rgba(217, 119, 6, 0.25);
+      color: #fde68a;
+      border-color: rgba(251, 191, 36, 0.3);
+    }
 
-  /* ── EMISSIONS GRID ── */
-  .emission-card {
-    border-radius: 8px; padding: 16px;
-    border-left: 4px solid;
-  }
-  .em-co   { background: #fef9ec; border-color: #f59e0b; }
-  .em-co2  { background: #f0fdf4; border-color: #22c55e; }
-  .em-nox  { background: #eff6ff; border-color: #3b82f6; }
-  .em-hc   { background: #fdf4ff; border-color: #a855f7; }
-  .em-pm   { background: #f9fafb; border-color: #6b7280; }
-  .emission-card h4 {
-    font-size: 15px; font-weight: 700;
-    margin-bottom: 6px; font-family: 'Playfair Display', serif;
-    color: var(--ink);
-  }
-  .emission-card .cause-tag {
-    display: inline-block; background: rgba(0,0,0,0.07);
-    padding: 2px 8px; border-radius: 4px;
-    font-size: 11px; margin: 2px 2px 2px 0;
-    font-family: 'JetBrains Mono', monospace;
-  }
+    .badge-b {
+      background: rgba(29, 78, 216, 0.25);
+      color: #bfdbfe;
+      border-color: rgba(147, 197, 253, 0.3);
+    }
 
-  /* ── LAW CARDS ── */
-  .law-card {
-    border-radius: 10px; padding: 20px;
-    border: 1.5px solid;
-  }
-  .law-0 { background: #fefce8; border-color: #fde047; }
-  .law-1 { background: #fff7ed; border-color: #fb923c; }
-  .law-2 { background: #f0fdf4; border-color: #4ade80; }
-  .law-card .law-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 30px; font-weight: 900; opacity: 0.15;
-    float: right; line-height: 1;
-  }
-  .law-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 17px; font-weight: 700; margin-bottom: 8px;
-  }
+    /* ── NAV ── */
+    nav {
+      background: var(--paper);
+      border-bottom: 2px solid var(--border);
+      padding: 0 40px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px var(--shadow);
+    }
 
-  /* ── FORMULA DASHBOARD ── */
-  #formulas {
-    background: linear-gradient(135deg, #0f0700, #1f1000);
-    color: #fdf6ec;
-    padding: 40px 32px;
-    border-radius: 16px;
-    margin: 40px 0;
-    position: relative; overflow: hidden;
-  }
-  #formulas::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(255,200,50,0.03) 80px, rgba(255,200,50,0.03) 81px);
-  }
-  #formulas h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 26px; font-weight: 900;
-    color: #fbbf24; margin-bottom: 8px; position: relative;
-  }
-  #formulas .dash-sub {
-    color: #a0856a; font-size: 13px; font-style: italic;
-    margin-bottom: 28px; position: relative;
-  }
-  .formula-group { margin-bottom: 28px; position: relative; }
-  .formula-group-title {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
-    color: #fbbf24; margin-bottom: 12px;
-    border-bottom: 1px solid rgba(251,191,36,0.2);
-    padding-bottom: 6px;
-  }
-  .formula-row {
-    display: flex; flex-wrap: wrap; gap: 12px;
-  }
-  .f-pill {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(251,191,36,0.2);
-    border-radius: 8px; padding: 10px 14px;
-    flex: 1; min-width: 180px;
-  }
-  .f-pill .f-name {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px; letter-spacing: 1px;
-    color: #a0856a; margin-bottom: 4px;
-    text-transform: uppercase;
-  }
-  .f-pill .f-expr { color: #fdf6ec; }
+    nav a {
+      padding: 13px 16px;
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--ink-light);
+      text-decoration: none;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
 
-  /* ── MIXTURE TABLE ── */
-  .mix-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
-  .mix-table th { background: #1a0a00; color: #fde68a; padding: 10px 14px; text-align: left; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1px; }
-  .mix-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
-  .mix-table .lean-row { background: #f0fdf4; }
-  .mix-table .stoich-row { background: #fffbf0; }
-  .mix-table .rich-row  { background: #fff5f5; }
+    nav a:hover {
+      color: var(--amber);
+      border-bottom-color: var(--amber);
+    }
 
-  /* ── CALLOUT ── */
-  .callout {
-    display: flex; gap: 12px; align-items: flex-start;
-    background: var(--amber-light); border: 1px solid #fcd34d;
-    border-radius: 8px; padding: 14px 16px; margin: 12px 0;
-  }
-  .callout.blue { background: var(--blue-light); border-color: var(--blue-mid); }
-  .callout.green { background: var(--green-light); border-color: var(--green-mid); }
-  .callout.red { background: var(--red-light); border-color: #fca5a5; }
-  .callout-icon { font-size: 18px; margin-top: 1px; }
-  .callout-text { font-size: 13.5px; color: var(--ink-light); }
-  .callout-text strong { color: var(--ink); }
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 32px;
+    }
 
-  /* ── ENERGY CARD ── */
-  .energy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .energy-card { border-radius: 10px; padding: 18px; }
-  .energy-re  { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 1px solid #86efac; }
-  .energy-nre { background: linear-gradient(135deg, #fff7ed, #fef3c7); border: 1px solid #fcd34d; }
-  .energy-card h4 { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; margin-bottom: 10px; }
-  .energy-item { display: flex; align-items: center; gap: 8px; font-size: 13.5px; margin-bottom: 5px; color: var(--ink-light); }
+    /* ── SECTION TITLES ── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 52px 0 28px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--border);
+      position: relative;
+    }
 
-  /* ── DIVIDER ── */
-  .divider { border: none; border-top: 1px dashed var(--border); margin: 30px 0; }
+    .section-header::before {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 60px;
+      height: 2px;
+      background: var(--amber);
+    }
 
-  /* ── FOOTER ── */
-  footer {
-    background: #1a0a00; color: #6b4c2a;
-    text-align: center; padding: 20px;
-    font-family: 'JetBrains Mono', monospace; font-size: 11px;
-    letter-spacing: 1px;
-  }
+    .section-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
 
-  /* ── SECTION A/B BANNER ── */
-  .section-banner {
-    padding: 12px 20px; border-radius: 8px;
-    font-family: 'Playfair Display', serif;
-    font-size: 18px; font-weight: 700;
-    margin: 40px 0 20px;
-    display: flex; align-items: center; gap: 10px;
-  }
-  .banner-a { background: linear-gradient(90deg, #fef3c7, #fdf6ec); border-left: 5px solid #d97706; color: #92400e; }
-  .banner-b { background: linear-gradient(90deg, #eff6ff, #f5f3ff); border-left: 5px solid #2563eb; color: #1e3a8a; }
+    .icon-amber {
+      background: var(--amber-light);
+    }
 
-  /* scroll margin for anchors */
-  [id] { scroll-margin-top: 60px; }
+    .icon-blue {
+      background: var(--blue-light);
+    }
 
-  .tag {
-    display: inline-block; padding: 2px 8px; border-radius: 4px;
-    font-size: 11px; font-family: 'JetBrains Mono', monospace;
-    background: var(--amber-light); color: var(--rust); margin: 1px;
-  }
-  .tag.blue { background: var(--blue-light); color: var(--blue-eng); }
-  .tag.green { background: var(--green-light); color: var(--green-eng); }
-  .tag.red { background: var(--red-light); color: var(--red-eng); }
+    .icon-green {
+      background: var(--green-light);
+    }
 
-  ul.concept-list { padding-left: 20px; }
-  ul.concept-list li { margin: 5px 0; color: var(--ink-light); }
+    .icon-red {
+      background: var(--red-light);
+    }
 
-  .highlight-row { background: #fef9ec; border-radius: 4px; padding: 2px 6px; }
-</style>
+    .icon-purple {
+      background: var(--purple-light);
+    }
+
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .section-header .sub {
+      font-size: 13px;
+      color: #6b5a3e;
+      font-style: italic;
+      margin-top: 2px;
+    }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px 26px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px var(--shadow);
+      transition: box-shadow 0.2s;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 18px var(--shadow);
+    }
+
+    .card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--rust);
+      margin: 14px 0 6px;
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .card p {
+      color: var(--ink-light);
+      margin-bottom: 8px;
+    }
+
+    /* ── GRID ── */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media(max-width:700px) {
+
+      .grid-2,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ── FORMULA BOX ── */
+    .formula-box {
+      background: linear-gradient(135deg, #fffbf0, #fef9ec);
+      border: 1.5px solid #f0d080;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 10px 0;
+      text-align: center;
+    }
+
+    .formula-box.blue {
+      background: linear-gradient(135deg, #f0f7ff, #e8f2ff);
+      border-color: #93c5fd;
+    }
+
+    .formula-box.green {
+      background: linear-gradient(135deg, #f0fff4, #e8fef0);
+      border-color: #6ee7b7;
+    }
+
+    .formula-box.red {
+      background: linear-gradient(135deg, #fff5f5, #fef0f0);
+      border-color: #fca5a5;
+    }
+
+    .formula-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #92763c;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    .formula-label.blue {
+      color: #3b82f6;
+    }
+
+    .formula-label.green {
+      color: #16a34a;
+    }
+
+    .formula-label.red {
+      color: #dc2626;
+    }
+
+    /* ── PV TABLE ── */
+    .pv-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      margin: 14px 0;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 6px var(--shadow);
+    }
+
+    .pv-table thead tr {
+      background: #1a0a00;
+      color: #fde68a;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .pv-table th {
+      padding: 11px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .pv-table td {
+      padding: 11px 14px;
+      border-bottom: 1px solid #f0e0c0;
+    }
+
+    .pv-table tbody tr:nth-child(odd) {
+      background: #fffdf8;
+    }
+
+    .pv-table tbody tr:nth-child(even) {
+      background: #fdf6ec;
+    }
+
+    .pv-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .pv-table .step-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      color: var(--rust);
+      font-size: 12px;
+    }
+
+    .pv-table .process-name {
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .pv-table .otto-col {
+      color: #b45309;
+    }
+
+    .pv-table .diesel-col {
+      color: #1d4ed8;
+    }
+
+    /* ── STROKE TIMELINE ── */
+    .stroke-timeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 14px 0;
+    }
+
+    @media(max-width:600px) {
+      .stroke-timeline {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .stroke-item {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 12px;
+      text-align: center;
+      position: relative;
+    }
+
+    .stroke-item::before {
+      content: attr(data-num);
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--amber);
+      color: #fff;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .stroke-icon {
+      font-size: 28px;
+      margin: 8px 0 6px;
+    }
+
+    .stroke-name {
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--ink);
+    }
+
+    .stroke-desc {
+      font-size: 12px;
+      color: #6b5a3e;
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    /* ── EMISSIONS GRID ── */
+    .emission-card {
+      border-radius: 8px;
+      padding: 16px;
+      border-left: 4px solid;
+    }
+
+    .em-co {
+      background: #fef9ec;
+      border-color: #f59e0b;
+    }
+
+    .em-co2 {
+      background: #f0fdf4;
+      border-color: #22c55e;
+    }
+
+    .em-nox {
+      background: #eff6ff;
+      border-color: #3b82f6;
+    }
+
+    .em-hc {
+      background: #fdf4ff;
+      border-color: #a855f7;
+    }
+
+    .em-pm {
+      background: #f9fafb;
+      border-color: #6b7280;
+    }
+
+    .emission-card h4 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      font-family: 'Playfair Display', serif;
+      color: var(--ink);
+    }
+
+    .emission-card .cause-tag {
+      display: inline-block;
+      background: rgba(0, 0, 0, 0.07);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      margin: 2px 2px 2px 0;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ── LAW CARDS ── */
+    .law-card {
+      border-radius: 10px;
+      padding: 20px;
+      border: 1.5px solid;
+    }
+
+    .law-0 {
+      background: #fefce8;
+      border-color: #fde047;
+    }
+
+    .law-1 {
+      background: #fff7ed;
+      border-color: #fb923c;
+    }
+
+    .law-2 {
+      background: #f0fdf4;
+      border-color: #4ade80;
+    }
+
+    .law-card .law-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      font-weight: 900;
+      opacity: 0.15;
+      float: right;
+      line-height: 1;
+    }
+
+    .law-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    /* ── FORMULA DASHBOARD ── */
+    #formulas {
+      background: linear-gradient(135deg, #0f0700, #1f1000);
+      color: #fdf6ec;
+      padding: 40px 32px;
+      border-radius: 16px;
+      margin: 40px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #formulas::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(255, 200, 50, 0.03) 80px, rgba(255, 200, 50, 0.03) 81px);
+    }
+
+    #formulas h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 900;
+      color: #fbbf24;
+      margin-bottom: 8px;
+      position: relative;
+    }
+
+    #formulas .dash-sub {
+      color: #a0856a;
+      font-size: 13px;
+      font-style: italic;
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    .formula-group {
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    .formula-group-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #fbbf24;
+      margin-bottom: 12px;
+      border-bottom: 1px solid rgba(251, 191, 36, 0.2);
+      padding-bottom: 6px;
+    }
+
+    .formula-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .f-pill {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(251, 191, 36, 0.2);
+      border-radius: 8px;
+      padding: 10px 14px;
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .f-pill .f-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: #a0856a;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    .f-pill .f-expr {
+      color: #fdf6ec;
+    }
+
+    /* ── MIXTURE TABLE ── */
+    .mix-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 14px;
+    }
+
+    .mix-table th {
+      background: #1a0a00;
+      color: #fde68a;
+      padding: 10px 14px;
+      text-align: left;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+
+    .mix-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mix-table .lean-row {
+      background: #f0fdf4;
+    }
+
+    .mix-table .stoich-row {
+      background: #fffbf0;
+    }
+
+    .mix-table .rich-row {
+      background: #fff5f5;
+    }
+
+    /* ── CALLOUT ── */
+    .callout {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      background: var(--amber-light);
+      border: 1px solid #fcd34d;
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin: 12px 0;
+    }
+
+    .callout.blue {
+      background: var(--blue-light);
+      border-color: var(--blue-mid);
+    }
+
+    .callout.green {
+      background: var(--green-light);
+      border-color: var(--green-mid);
+    }
+
+    .callout.red {
+      background: var(--red-light);
+      border-color: #fca5a5;
+    }
+
+    .callout-icon {
+      font-size: 18px;
+      margin-top: 1px;
+    }
+
+    .callout-text {
+      font-size: 13.5px;
+      color: var(--ink-light);
+    }
+
+    .callout-text strong {
+      color: var(--ink);
+    }
+
+    /* ── ENERGY CARD ── */
+    .energy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .energy-card {
+      border-radius: 10px;
+      padding: 18px;
+    }
+
+    .energy-re {
+      background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+      border: 1px solid #86efac;
+    }
+
+    .energy-nre {
+      background: linear-gradient(135deg, #fff7ed, #fef3c7);
+      border: 1px solid #fcd34d;
+    }
+
+    .energy-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .energy-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13.5px;
+      margin-bottom: 5px;
+      color: var(--ink-light);
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      border: none;
+      border-top: 1px dashed var(--border);
+      margin: 30px 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1a0a00;
+      color: #6b4c2a;
+      text-align: center;
+      padding: 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+
+    /* ── SECTION A/B BANNER ── */
+    .section-banner {
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin: 40px 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .banner-a {
+      background: linear-gradient(90deg, #fef3c7, #fdf6ec);
+      border-left: 5px solid #d97706;
+      color: #92400e;
+    }
+
+    .banner-b {
+      background: linear-gradient(90deg, #eff6ff, #f5f3ff);
+      border-left: 5px solid #2563eb;
+      color: #1e3a8a;
+    }
+
+    /* scroll margin for anchors */
+    [id] {
+      scroll-margin-top: 60px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--amber-light);
+      color: var(--rust);
+      margin: 1px;
+    }
+
+    .tag.blue {
+      background: var(--blue-light);
+      color: var(--blue-eng);
+    }
+
+    .tag.green {
+      background: var(--green-light);
+      color: var(--green-eng);
+    }
+
+    .tag.red {
+      background: var(--red-light);
+      color: var(--red-eng);
+    }
+
+    ul.concept-list {
+      padding-left: 20px;
+    }
+
+    ul.concept-list li {
+      margin: 5px 0;
+      color: var(--ink-light);
+    }
+
+    .highlight-row {
+      background: #fef9ec;
+      border-radius: 4px;
+      padding: 2px 6px;
+    }
+
+    /* ── COLLAPSIBLES & CHECKLIST ── */
+    .section-banner {
+      cursor: pointer;
+      user-select: none;
+      justify-content: space-between;
+    }
+
+    .section-banner::after {
+      content: '▲';
+      font-size: 14px;
+      transition: transform 0.3s;
+    }
+
+    .section-banner.collapsed::after {
+      transform: rotate(180deg);
+    }
+
+    .section-content {
+      overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.4s ease;
+      opacity: 1;
+      max-height: 8000px;
+    }
+
+    .section-content.collapsed {
+      max-height: 0 !important;
+      opacity: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+      pointer-events: none;
+    }
+
+    .checklist-card {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 8px var(--shadow);
+    }
+
+    .checklist-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      margin-bottom: 12px;
+      margin-top: 16px;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .checklist-card h3:first-child {
+      margin-top: 0;
+    }
+
+    .study-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      padding: 6px 8px;
+      border-radius: 6px;
+      transition: background 0.2s;
+      font-size: 14.5px;
+      margin-bottom: 5px;
+      color: var(--ink-light);
+    }
+
+    .study-label:hover {
+      background: rgba(0, 0, 0, 0.03);
+    }
+
+    .study-cb {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      accent-color: var(--amber);
+      flex-shrink: 0;
+    }
+
+    .study-label.completed {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+
+    .study-label.completed strong {
+      font-weight: normal;
+    }
+
+    /* ── PROGRESS BAR ── */
+    .progress-container {
+      position: sticky;
+      bottom: 0;
+      background: var(--paper);
+      border-top: 2px solid var(--border);
+      padding: 15px 40px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+      z-index: 1000;
+    }
+
+    @media(max-width: 600px) {
+      .progress-container {
+        flex-direction: column;
+        padding: 15px 20px;
+        gap: 10px;
+      }
+
+      .progress-wrapper,
+      .btn-complete {
+        width: 100%;
+      }
+    }
+
+    .progress-wrapper {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .progress-bar {
+      flex: 1;
+      background: #e5d5b0;
+      height: 12px;
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      background: linear-gradient(90deg, #f59e0b, #d97706);
+      height: 100%;
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+
+    .progress-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--rust);
+      min-width: 45px;
+      text-align: right;
+    }
+
+    .btn-complete {
+      background: var(--green-eng);
+      color: #fff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-complete:hover {
+      background: #166534;
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- ══ HEADER ══ -->
-<header>
-  <div class="header-tag">STUDY NOTES · MECHANICAL ENGINEERING</div>
-  <h1>Fundamentals of<br/><span>Mechanical Engineering</span></h1>
-  <p class="header-sub">Engine Cycles · Thermodynamics · Emissions · Energy Systems</p>
-  <div class="section-badges">
-    <span class="badge badge-a">🅰 Section A — Core Engine Concepts</span>
-    <span class="badge badge-b">🅱 Section B — Thermodynamics & Applications</span>
-  </div>
-</header>
+  <!-- ══ HEADER ══ -->
+  <header>
+    <div class="header-tag">STUDY NOTES · MECHANICAL ENGINEERING</div>
+    <h1>Fundamentals of<br /><span>Mechanical Engineering</span></h1>
+    <p class="header-sub">Engine Cycles · Thermodynamics · Emissions · Energy Systems</p>
+    <div class="section-badges">
+      <span class="badge badge-a">🅰 Section A — Core Engine Concepts</span>
+      <span class="badge badge-b">🅱 Section B — Thermodynamics & Applications</span>
+    </div>
+  </header>
 
-<!-- ══ NAV ══ -->
-<nav>
-  <a href="#formulas">📊 Formula Dashboard</a>
-  <a href="#pv-table">📈 PV Tables</a>
-  <a href="#engine-cycles">⚙ Engine Cycles</a>
-  <a href="#strokes">🔄 4 Strokes</a>
-  <a href="#fuel-air">⛽ Fuel–Air</a>
-  <a href="#engine-calc">📏 Engine Calc</a>
-  <a href="#laws">🌡 Thermo Laws</a>
-  <a href="#energy">⚡ Energy</a>
-  <a href="#emissions">🌫 Emissions</a>
-</nav>
+  <!-- ══ NAV ══ -->
+  <nav>
+    <a href="#formulas">📊 Formula Dashboard</a>
+    <a href="#pv-table">📈 PV Tables</a>
+    <a href="#engine-cycles">⚙ Engine Cycles</a>
+    <a href="#strokes">🔄 4 Strokes</a>
+    <a href="#fuel-air">⛽ Fuel–Air</a>
+    <a href="#engine-calc">📏 Engine Calc</a>
+    <a href="#laws">🌡 Thermo Laws</a>
+    <a href="#energy">⚡ Energy</a>
+    <a href="#emissions">🌫 Emissions</a>
+  </nav>
 
-<div class="container">
+  <div class="container">
 
-<!-- ══════════════════════════════════════════
+    <!-- ══════════════════════════════════════════
      FORMULA DASHBOARD
 ══════════════════════════════════════════ -->
-<div id="formulas">
-  <h2>📊 Formula Dashboard</h2>
-  <p class="dash-sub">All key formulas at a glance — your quick reference sheet</p>
+    <div id="formulas">
+      <h2>📊 Formula Dashboard</h2>
+      <p class="dash-sub">All key formulas at a glance — your quick reference sheet</p>
 
-  <!-- Engine Efficiency -->
-  <div class="formula-group">
-    <div class="formula-group-title">⚙ Engine Efficiency</div>
-    <div class="formula-row">
-      <div class="f-pill">
-        <div class="f-name">Otto Cycle Efficiency</div>
-        <div class="f-expr">$$\eta_{Otto} = 1 - \frac{1}{r^{\gamma - 1}}$$</div>
+      <!-- Engine Efficiency -->
+      <div class="formula-group">
+        <div class="formula-group-title">⚙ Engine Efficiency</div>
+        <div class="formula-row">
+          <div class="f-pill">
+            <div class="f-name">Otto Cycle Efficiency</div>
+            <div class="f-expr">$$\eta_{Otto} = 1 - \frac{1}{r^{\gamma - 1}}$$</div>
+          </div>
+          <div class="f-pill">
+            <div class="f-name">Diesel Cycle Efficiency</div>
+            <div class="f-expr">$$\eta_{Diesel} = 1 - \frac{1}{r^{\gamma-1}} \cdot \frac{r_c^\gamma - 1}{\gamma(r_c -
+              1)}$$</div>
+          </div>
+          <div class="f-pill">
+            <div class="f-name">Compression Ratio</div>
+            <div class="f-expr">$$r = \frac{V_{max}}{V_{min}} = \frac{V_{BDC}}{V_{TDC}}$$</div>
+          </div>
+          <div class="f-pill">
+            <div class="f-name">Cut-off Ratio (Diesel)</div>
+            <div class="f-expr">$$r_c = \frac{V_3}{V_2}$$</div>
+          </div>
+        </div>
       </div>
-      <div class="f-pill">
-        <div class="f-name">Diesel Cycle Efficiency</div>
-        <div class="f-expr">$$\eta_{Diesel} = 1 - \frac{1}{r^{\gamma-1}} \cdot \frac{r_c^\gamma - 1}{\gamma(r_c - 1)}$$</div>
-      </div>
-      <div class="f-pill">
-        <div class="f-name">Compression Ratio</div>
-        <div class="f-expr">$$r = \frac{V_{max}}{V_{min}} = \frac{V_{BDC}}{V_{TDC}}$$</div>
-      </div>
-      <div class="f-pill">
-        <div class="f-name">Cut-off Ratio (Diesel)</div>
-        <div class="f-expr">$$r_c = \frac{V_3}{V_2}$$</div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Volumes -->
-  <div class="formula-group">
-    <div class="formula-group-title">📦 Engine Volumes</div>
-    <div class="formula-row">
-      <div class="f-pill">
-        <div class="f-name">Swept Volume</div>
-        <div class="f-expr">$$V_s = \frac{\pi}{4} D^2 \times L$$</div>
+      <!-- Volumes -->
+      <div class="formula-group">
+        <div class="formula-group-title">📦 Engine Volumes</div>
+        <div class="formula-row">
+          <div class="f-pill">
+            <div class="f-name">Swept Volume</div>
+            <div class="f-expr">$$V_s = \frac{\pi}{4} D^2 \times L$$</div>
+          </div>
+          <div class="f-pill">
+            <div class="f-name">Total Volume</div>
+            <div class="f-expr">$$V_{total} = V_s + V_c$$</div>
+          </div>
+          <div class="f-pill">
+            <div class="f-name">Compression Ratio (alt)</div>
+            <div class="f-expr">$$r = \frac{V_s + V_c}{V_c}$$</div>
+          </div>
+        </div>
       </div>
-      <div class="f-pill">
-        <div class="f-name">Total Volume</div>
-        <div class="f-expr">$$V_{total} = V_s + V_c$$</div>
-      </div>
-      <div class="f-pill">
-        <div class="f-name">Compression Ratio (alt)</div>
-        <div class="f-expr">$$r = \frac{V_s + V_c}{V_c}$$</div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Otto PV States -->
-  <div class="formula-group">
-    <div class="formula-group-title">🔥 Otto Cycle — State Equations</div>
-    <div class="formula-row">
-      <div class="f-pill">
-        <div class="f-name">Isentropic T relation</div>
-        <div class="f-expr">$$\frac{T_2}{T_1} = \left(\frac{V_1}{V_2}\right)^{\gamma-1} = r^{\gamma-1}$$</div>
+      <!-- Otto PV States -->
+      <div class="formula-group">
+        <div class="formula-group-title">🔥 Otto Cycle — State Equations</div>
+        <div class="formula-row">
+          <div class="f-pill">
+            <div class="f-name">Isentropic T relation</div>
+            <div class="f-expr">$$\frac{T_2}{T_1} = \left(\frac{V_1}{V_2}\right)^{\gamma-1} = r^{\gamma-1}$$</div>
+          </div>
+          <div class="f-pill">
+            <div class="f-name">Isentropic P relation</div>
+            <div class="f-expr">$$\frac{P_2}{P_1} = \left(\frac{V_1}{V_2}\right)^{\gamma} = r^{\gamma}$$</div>
+          </div>
+          <div class="f-pill">
+            <div class="f-name">Isochoric (const-V) heat</div>
+            <div class="f-expr">$$Q_{in} = m\,c_v\,(T_3 - T_2)$$</div>
+          </div>
+          <div class="f-pill">
+            <div class="f-name">Work output</div>
+            <div class="f-expr">$$W_{net} = Q_{in} - Q_{out}$$</div>
+          </div>
+        </div>
       </div>
-      <div class="f-pill">
-        <div class="f-name">Isentropic P relation</div>
-        <div class="f-expr">$$\frac{P_2}{P_1} = \left(\frac{V_1}{V_2}\right)^{\gamma} = r^{\gamma}$$</div>
-      </div>
-      <div class="f-pill">
-        <div class="f-name">Isochoric (const-V) heat</div>
-        <div class="f-expr">$$Q_{in} = m\,c_v\,(T_3 - T_2)$$</div>
-      </div>
-      <div class="f-pill">
-        <div class="f-name">Work output</div>
-        <div class="f-expr">$$W_{net} = Q_{in} - Q_{out}$$</div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Diesel PV States -->
-  <div class="formula-group">
-    <div class="formula-group-title">🚜 Diesel Cycle — State Equations</div>
-    <div class="formula-row">
-      <div class="f-pill">
-        <div class="f-name">After compression (1→2)</div>
-        <div class="f-expr">$$T_2 = T_1 \cdot r^{\gamma-1}, \quad P_2 = P_1 \cdot r^{\gamma}$$</div>
+      <!-- Diesel PV States -->
+      <div class="formula-group">
+        <div class="formula-group-title">🚜 Diesel Cycle — State Equations</div>
+        <div class="formula-row">
+          <div class="f-pill">
+            <div class="f-name">After compression (1→2)</div>
+            <div class="f-expr">$$T_2 = T_1 \cdot r^{\gamma-1}, \quad P_2 = P_1 \cdot r^{\gamma}$$</div>
+          </div>
+          <div class="f-pill">
+            <div class="f-name">After const-P combustion</div>
+            <div class="f-expr">$$T_3 = T_2 \cdot r_c, \quad P_3 = P_2$$</div>
+          </div>
+          <div class="f-pill">
+            <div class="f-name">After expansion (3→4)</div>
+            <div class="f-expr">$$T_4 = T_3 \left(\frac{r_c}{r}\right)^{\gamma-1}$$</div>
+          </div>
+          <div class="f-pill">
+            <div class="f-name">Isobaric heat input</div>
+            <div class="f-expr">$$Q_{in} = m\,c_p\,(T_3 - T_2)$$</div>
+          </div>
+        </div>
       </div>
-      <div class="f-pill">
-        <div class="f-name">After const-P combustion</div>
-        <div class="f-expr">$$T_3 = T_2 \cdot r_c, \quad P_3 = P_2$$</div>
-      </div>
-      <div class="f-pill">
-        <div class="f-name">After expansion (3→4)</div>
-        <div class="f-expr">$$T_4 = T_3 \left(\frac{r_c}{r}\right)^{\gamma-1}$$</div>
-      </div>
-      <div class="f-pill">
-        <div class="f-name">Isobaric heat input</div>
-        <div class="f-expr">$$Q_{in} = m\,c_p\,(T_3 - T_2)$$</div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Fuel Air -->
-  <div class="formula-group">
-    <div class="formula-group-title">⛽ Fuel–Air Mixture</div>
-    <div class="formula-row">
-      <div class="f-pill">
-        <div class="f-name">Air-Fuel Ratio</div>
-        <div class="f-expr">$$AFR = \frac{m_{air}}{m_{fuel}}$$</div>
+      <!-- Fuel Air -->
+      <div class="formula-group">
+        <div class="formula-group-title">⛽ Fuel–Air Mixture</div>
+        <div class="formula-row">
+          <div class="f-pill">
+            <div class="f-name">Air-Fuel Ratio</div>
+            <div class="f-expr">$$AFR = \frac{m_{air}}{m_{fuel}}$$</div>
+          </div>
+          <div class="f-pill">
+            <div class="f-name">Equivalence Ratio</div>
+            <div class="f-expr">$$\phi = \frac{AFR_{stoich}}{AFR_{actual}} = \frac{(F/A)_{actual}}{(F/A)_{stoich}}$$
+            </div>
+          </div>
+          <div class="f-pill">
+            <div class="f-name">Stoichiometric AFR (petrol)</div>
+            <div class="f-expr">$$AFR_{stoich} \approx 14.7$$</div>
+          </div>
+        </div>
       </div>
-      <div class="f-pill">
-        <div class="f-name">Equivalence Ratio</div>
-        <div class="f-expr">$$\phi = \frac{AFR_{stoich}}{AFR_{actual}} = \frac{(F/A)_{actual}}{(F/A)_{stoich}}$$</div>
-      </div>
-      <div class="f-pill">
-        <div class="f-name">Stoichiometric AFR (petrol)</div>
-        <div class="f-expr">$$AFR_{stoich} \approx 14.7$$</div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Gear & Misc -->
-  <div class="formula-group">
-    <div class="formula-group-title">⚙ Gear & Other</div>
-    <div class="formula-row">
-      <div class="f-pill">
-        <div class="f-name">Gear Ratio</div>
-        <div class="f-expr">$$GR = \frac{N_{driven}}{N_{driver}} = \frac{T_{driven}}{T_{driver}}$$</div>
+      <!-- Gear & Misc -->
+      <div class="formula-group">
+        <div class="formula-group-title">⚙ Gear & Other</div>
+        <div class="formula-row">
+          <div class="f-pill">
+            <div class="f-name">Gear Ratio</div>
+            <div class="f-expr">$$GR = \frac{N_{driven}}{N_{driver}} = \frac{T_{driven}}{T_{driver}}$$</div>
+          </div>
+          <div class="f-pill">
+            <div class="f-name">First Law of Thermodynamics</div>
+            <div class="f-expr">$$\Delta U = Q - W$$</div>
+          </div>
+          <div class="f-pill">
+            <div class="f-name">Thermal Efficiency (general)</div>
+            <div class="f-expr">$$\eta_{th} = \frac{W_{net}}{Q_{in}} = 1 - \frac{Q_{out}}{Q_{in}}$$</div>
+          </div>
+        </div>
       </div>
-      <div class="f-pill">
-        <div class="f-name">First Law of Thermodynamics</div>
-        <div class="f-expr">$$\Delta U = Q - W$$</div>
-      </div>
-      <div class="f-pill">
-        <div class="f-name">Thermal Efficiency (general)</div>
-        <div class="f-expr">$$\eta_{th} = \frac{W_{net}}{Q_{in}} = 1 - \frac{Q_{out}}{Q_{in}}$$</div>
-      </div>
-    </div>
-  </div>
-</div><!-- end #formulas -->
+    </div><!-- end #formulas -->
 
 
-<!-- ══════════════════════════════════════════
+    <!-- ══════════════════════════════════════════
      SECTION A BANNER
 ══════════════════════════════════════════ -->
-<div class="section-banner banner-a">🅰️ Section A — Core Engine Concepts</div>
+    <div class="section-banner banner-a" id="banner-a" onclick="toggleSection('section-a-content', 'banner-a')">🅰️
+      Section A — Core Engine Concepts</div>
+    <div id="section-a-content" class="section-content">
 
+      <div class="checklist-card">
+        <h3>⚙️ Engine Cycles</h3>
+        <label class="study-label"><input type="checkbox" class="study-cb"> 🔥 <strong>Study the Otto
+            Cycle</strong></label>
+        <label class="study-label"><input type="checkbox" class="study-cb"> 📐 Practice <strong>Temperature (T)
+            calculation in Otto cycle</strong></label>
+        <label class="study-label"><input type="checkbox" class="study-cb"> 🚜 <strong>Study the Diesel
+            Cycle</strong></label>
+        <label class="study-label"><input type="checkbox" class="study-cb"> 📊 Draw and explain <strong>PV diagram of
+            Otto Cycle</strong></label>
+        <label class="study-label"><input type="checkbox" class="study-cb"> 📉 Draw and explain <strong>PV diagram of
+            Diesel Cycle</strong></label>
 
-<!-- ══ ENGINE CYCLES ══ -->
-<div id="engine-cycles" class="section-header">
-  <div class="section-icon icon-amber">🔥</div>
-  <div>
-    <h2>Engine Cycles</h2>
-    <div class="sub">Otto Cycle (SI) · Diesel Cycle (CI) · PV Diagrams</div>
-  </div>
-</div>
+        <h3>🧮 Thermodynamic Calculations</h3>
+        <label class="study-label"><input type="checkbox" class="study-cb"> 📐 Practice <strong>Pressure (P) calculation
+            in Otto cycle</strong></label>
+        <label class="study-label"><input type="checkbox" class="study-cb"> 📐 Practice <strong>Temperature (T)
+            calculation in Diesel cycle</strong></label>
+        <label class="study-label"><input type="checkbox" class="study-cb"> 📐 Practice <strong>Pressure (P) calculation
+            in Diesel cycle</strong></label>
 
-<div class="grid-2">
-  <!-- OTTO -->
-  <div class="card">
-    <h3>🔥 Otto Cycle <span style="font-size:12px;color:#6b5a3e;font-family:monospace;margin-left:6px;">(Spark Ignition)</span></h3>
-    <p>Used in petrol/gasoline engines. Heat addition occurs at <strong>constant volume</strong> (isochoric).</p>
-    <div class="formula-box">
-      <div class="formula-label">Thermal Efficiency</div>
-      $$\eta_{Otto} = 1 - \frac{1}{r^{\gamma - 1}}$$
-    </div>
-    <h4>Key Parameters</h4>
-    <ul class="concept-list">
-      <li>$r$ = compression ratio $= V_1/V_2$</li>
-      <li>$\gamma$ = ratio of specific heats $= c_p/c_v \approx 1.4$ (air)</li>
-      <li>Typical $r$ for petrol engine: <strong>8 – 12</strong></li>
-    </ul>
-    <div class="callout">
-      <span class="callout-icon">💡</span>
-      <span class="callout-text"><strong>Higher compression ratio → Higher efficiency</strong>, but limited by engine knock (auto-ignition).</span>
-    </div>
-  </div>
+        <h3>⛽ Fuel–Air Mixture Concepts</h3>
+        <label class="study-label"><input type="checkbox" class="study-cb"> ⚖️ Understand <strong>Air Fuel Ratio
+            (AFR)</strong></label>
+        <label class="study-label"><input type="checkbox" class="study-cb"> 🔬 Understand <strong>Equivalence Ratio
+            (φ)</strong></label>
+        <label class="study-label"><input type="checkbox" class="study-cb"> 🟢 Understand <strong>Lean
+            mixture</strong></label>
+        <label class="study-label"><input type="checkbox" class="study-cb"> 🔴 Understand <strong>Rich
+            mixture</strong></label>
 
-  <!-- DIESEL -->
-  <div class="card">
-    <h3>🚜 Diesel Cycle <span style="font-size:12px;color:#6b5a3e;font-family:monospace;margin-left:6px;">(Compression Ignition)</span></h3>
-    <p>Used in diesel engines. Heat addition at <strong>constant pressure</strong> (isobaric).</p>
-    <div class="formula-box blue">
-      <div class="formula-label blue">Thermal Efficiency</div>
-      $$\eta_{Diesel} = 1 - \frac{1}{r^{\gamma-1}} \cdot \frac{r_c^\gamma - 1}{\gamma(r_c - 1)}$$
-    </div>
-    <h4>Key Parameters</h4>
-    <ul class="concept-list">
-      <li>$r_c$ = cut-off ratio $= V_3/V_2$ (ratio of volume after/before combustion)</li>
-      <li>Typical $r$ for diesel engine: <strong>14 – 22</strong></li>
-      <li>As $r_c \to 1$, Diesel efficiency $\to$ Otto efficiency</li>
-    </ul>
-    <div class="callout blue">
-      <span class="callout-icon">💡</span>
-      <span class="callout-text"><strong>Higher $r$, lower $r_c$ → Higher Diesel efficiency.</strong> Diesel engines are more efficient than Otto at same compression ratio.</span>
-    </div>
-  </div>
-</div>
+        <h3>🔄 IC Engine Operation</h3>
+        <label class="study-label"><input type="checkbox" class="study-cb"> 🔁 Memorize <strong>4 strokes of Internal
+            Combustion Engine</strong></label>
+        <label class="study-label" style="margin-left: 20px;"><input type="checkbox" class="study-cb"> Intake
+          stroke</label>
+        <label class="study-label" style="margin-left: 20px;"><input type="checkbox" class="study-cb"> Compression
+          stroke</label>
+        <label class="study-label" style="margin-left: 20px;"><input type="checkbox" class="study-cb"> Power
+          stroke</label>
+        <label class="study-label" style="margin-left: 20px;"><input type="checkbox" class="study-cb"> Exhaust
+          stroke</label>
 
-<!-- PV DIAGRAM EXPLANATION -->
-<div class="card">
-  <h3>📊 PV Diagrams — Otto vs Diesel</h3>
-  <div class="grid-2">
-    <div>
-      <h4>Otto PV Diagram (4 Processes)</h4>
-      <p style="font-size:13px;color:#6b5a3e;margin-bottom:10px;">State points: 1 → 2 → 3 → 4 → 1</p>
-      <svg viewBox="0 0 280 220" style="width:100%;background:#fffdf8;border:1px solid var(--border);border-radius:8px;">
-        <!-- Axes -->
-        <line x1="40" y1="190" x2="260" y2="190" stroke="#ccc" stroke-width="1.5"/>
-        <line x1="40" y1="10" x2="40" y2="190" stroke="#ccc" stroke-width="1.5"/>
-        <text x="260" y="200" font-size="11" fill="#666" font-family="serif">V</text>
-        <text x="28" y="14" font-size="11" fill="#666" font-family="serif">P</text>
-        <!-- Otto Curve: 1→2 isentropic compression -->
-        <path d="M 200,170 Q 130,155 85,60" stroke="#d97706" stroke-width="2" fill="none"/>
-        <!-- 2→3 isochoric heat addition -->
-        <line x1="85" y1="60" x2="85" y2="22" stroke="#dc2626" stroke-width="2"/>
-        <!-- 3→4 isentropic expansion -->
-        <path d="M 85,22 Q 140,40 200,80" stroke="#d97706" stroke-width="2" fill="none"/>
-        <!-- 4→1 isochoric heat rejection -->
-        <line x1="200" y1="80" x2="200" y2="170" stroke="#3b82f6" stroke-width="2"/>
-        <!-- Shaded area -->
-        <path d="M 200,170 Q 130,155 85,60 L 85,22 Q 140,40 200,80 Z" fill="rgba(217,119,6,0.1)"/>
-        <!-- Labels -->
-        <text x="196" y="184" font-size="10" fill="#333" font-family="serif">1</text>
-        <text x="78" y="56" font-size="10" fill="#333" font-family="serif">2</text>
-        <text x="78" y="20" font-size="10" fill="#333" font-family="serif">3</text>
-        <text x="196" y="76" font-size="10" fill="#333" font-family="serif">4</text>
-        <!-- Process labels -->
-        <text x="120" y="148" font-size="9" fill="#d97706" font-family="monospace">Isentropic</text>
-        <text x="55" y="44" font-size="9" fill="#dc2626" font-family="monospace">Isochoric</text>
-        <text x="130" y="26" font-size="9" fill="#d97706" font-family="monospace">Isentropic</text>
-        <text x="204" y="128" font-size="9" fill="#3b82f6" font-family="monospace">Isochoric</text>
-      </svg>
-    </div>
-    <div>
-      <h4>Diesel PV Diagram (4 Processes)</h4>
-      <p style="font-size:13px;color:#6b5a3e;margin-bottom:10px;">State points: 1 → 2 → 3 → 4 → 1</p>
-      <svg viewBox="0 0 280 220" style="width:100%;background:#fffdf8;border:1px solid var(--border);border-radius:8px;">
-        <line x1="40" y1="190" x2="260" y2="190" stroke="#ccc" stroke-width="1.5"/>
-        <line x1="40" y1="10" x2="40" y2="190" stroke="#ccc" stroke-width="1.5"/>
-        <text x="260" y="200" font-size="11" fill="#666" font-family="serif">V</text>
-        <text x="28" y="14" font-size="11" fill="#666" font-family="serif">P</text>
-        <!-- 1→2 isentropic compression -->
-        <path d="M 200,170 Q 120,155 80,48" stroke="#1d4ed8" stroke-width="2" fill="none"/>
-        <!-- 2→3 isobaric heat addition (horizontal) -->
-        <line x1="80" y1="48" x2="115" y2="48" stroke="#dc2626" stroke-width="2"/>
-        <!-- 3→4 isentropic expansion -->
-        <path d="M 115,48 Q 160,65 200,95" stroke="#1d4ed8" stroke-width="2" fill="none"/>
-        <!-- 4→1 isochoric heat rejection -->
-        <line x1="200" y1="95" x2="200" y2="170" stroke="#6b7280" stroke-width="2"/>
-        <!-- Shaded area -->
-        <path d="M 200,170 Q 120,155 80,48 L 115,48 Q 160,65 200,95 Z" fill="rgba(29,78,216,0.1)"/>
-        <!-- Labels -->
-        <text x="196" y="184" font-size="10" fill="#333" font-family="serif">1</text>
-        <text x="73" y="44" font-size="10" fill="#333" font-family="serif">2</text>
-        <text x="112" y="44" font-size="10" fill="#333" font-family="serif">3</text>
-        <text x="196" y="92" font-size="10" fill="#333" font-family="serif">4</text>
-        <!-- Labels -->
-        <text x="105" y="148" font-size="9" fill="#1d4ed8" font-family="monospace">Isentropic</text>
-        <text x="80" y="40" font-size="9" fill="#dc2626" font-family="monospace">Isobaric</text>
-        <text x="130" y="55" font-size="9" fill="#1d4ed8" font-family="monospace">Isentropic</text>
-        <text x="204" y="136" font-size="9" fill="#6b7280" font-family="monospace">Isochoric</text>
-      </svg>
-    </div>
-  </div>
-</div>
-
-
-<!-- ══ PV CALCULATION TABLE ══ -->
-<div id="pv-table" class="section-header">
-  <div class="section-icon icon-amber">📈</div>
-  <div>
-    <h2>PV Calculation Formulas — All 4 Steps</h2>
-    <div class="sub">Otto (isochoric combustion) vs Diesel (isobaric combustion)</div>
-  </div>
-</div>
-
-<div class="card">
-  <h3>🔥 Otto Cycle — State-by-State T & P Formulas</h3>
-  <table class="pv-table">
-    <thead>
-      <tr>
-        <th>Step</th>
-        <th>Process</th>
-        <th>Temperature $T$</th>
-        <th>Pressure $P$</th>
-        <th>Volume</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="step-num">1 → 2</td>
-        <td class="process-name">Isentropic<br/><span style="font-size:11px;color:#666;">Compression</span></td>
-        <td class="otto-col">$T_2 = T_1 \cdot r^{\gamma-1}$</td>
-        <td class="otto-col">$P_2 = P_1 \cdot r^{\gamma}$</td>
-        <td>$V_2 = V_1/r$</td>
-      </tr>
-      <tr>
-        <td class="step-num">2 → 3</td>
-        <td class="process-name">Isochoric<br/><span style="font-size:11px;color:#666;">Heat Addition</span></td>
-        <td class="otto-col">$T_3 = \dfrac{P_3}{P_2} \cdot T_2$</td>
-        <td class="otto-col">$P_3 = \dfrac{T_3}{T_2} \cdot P_2$</td>
-        <td>$V_3 = V_2$ <span style="font-size:11px;color:#999;">(const)</span></td>
-      </tr>
-      <tr>
-        <td class="step-num">3 → 4</td>
-        <td class="process-name">Isentropic<br/><span style="font-size:11px;color:#666;">Expansion</span></td>
-        <td class="otto-col">$T_4 = T_3 \cdot \dfrac{1}{r^{\gamma-1}}$</td>
-        <td class="otto-col">$P_4 = P_3 \cdot \dfrac{1}{r^{\gamma}}$</td>
-        <td>$V_4 = V_1$</td>
-      </tr>
-      <tr>
-        <td class="step-num">4 → 1</td>
-        <td class="process-name">Isochoric<br/><span style="font-size:11px;color:#666;">Heat Rejection</span></td>
-        <td class="otto-col">$T_1$ (given / initial)</td>
-        <td class="otto-col">$P_1$ (given / initial)</td>
-        <td>$V_1 = V_4$ <span style="font-size:11px;color:#999;">(const)</span></td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="callout" style="margin-top:14px;">
-    <span class="callout-icon">📌</span>
-    <span class="callout-text">For Otto: $\dfrac{T_3}{T_2} = \dfrac{P_3}{P_2}$ (constant volume, ideal gas law). Also note: $T_2/T_1 = T_3/T_4$ (symmetric isentropic processes).</span>
-  </div>
-</div>
-
-<div class="card" style="margin-top:20px;">
-  <h3>🚜 Diesel Cycle — State-by-State T & P Formulas</h3>
-  <table class="pv-table">
-    <thead>
-      <tr>
-        <th>Step</th>
-        <th>Process</th>
-        <th>Temperature $T$</th>
-        <th>Pressure $P$</th>
-        <th>Volume</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="step-num">1 → 2</td>
-        <td class="process-name">Isentropic<br/><span style="font-size:11px;color:#666;">Compression</span></td>
-        <td class="diesel-col">$T_2 = T_1 \cdot r^{\gamma-1}$</td>
-        <td class="diesel-col">$P_2 = P_1 \cdot r^{\gamma}$</td>
-        <td>$V_2 = V_1/r$</td>
-      </tr>
-      <tr>
-        <td class="step-num">2 → 3</td>
-        <td class="process-name">Isobaric<br/><span style="font-size:11px;color:#666;">Heat Addition</span></td>
-        <td class="diesel-col">$T_3 = T_2 \cdot r_c$</td>
-        <td class="diesel-col">$P_3 = P_2$ <span style="font-size:11px;color:#999;">(const)</span></td>
-        <td>$V_3 = r_c \cdot V_2$</td>
-      </tr>
-      <tr>
-        <td class="step-num">3 → 4</td>
-        <td class="process-name">Isentropic<br/><span style="font-size:11px;color:#666;">Expansion</span></td>
-        <td class="diesel-col">$T_4 = T_3 \left(\dfrac{r_c}{r}\right)^{\gamma-1}$</td>
-        <td class="diesel-col">$P_4 = P_3 \left(\dfrac{V_3}{V_4}\right)^{\gamma}$</td>
-        <td>$V_4 = V_1$</td>
-      </tr>
-      <tr>
-        <td class="step-num">4 → 1</td>
-        <td class="process-name">Isochoric<br/><span style="font-size:11px;color:#666;">Heat Rejection</span></td>
-        <td class="diesel-col">$T_1$ (given / initial)</td>
-        <td class="diesel-col">$P_1$ (given / initial)</td>
-        <td>$V_1 = V_4$ <span style="font-size:11px;color:#999;">(const)</span></td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="callout blue" style="margin-top:14px;">
-    <span class="callout-icon">📌</span>
-    <span class="callout-text">For Diesel step 2→3 (isobaric): Use <strong>$T_3/T_2 = V_3/V_2 = r_c$</strong> (ideal gas at constant pressure). The cut-off ratio $r_c = V_3/V_2 &gt; 1$.</span>
-  </div>
-
-  <!-- Side-by-side comparison -->
-  <h4 style="margin-top:18px;">Key Difference: Otto vs Diesel Combustion</h4>
-  <table class="mix-table">
-    <thead><tr><th>Property</th><th>Otto Cycle</th><th>Diesel Cycle</th></tr></thead>
-    <tbody>
-      <tr class="stoich-row"><td>Combustion type</td><td>Isochoric (const. $V$)</td><td>Isobaric (const. $P$)</td></tr>
-      <tr><td>Ignition method</td><td>Spark plug</td><td>Compression heat</td></tr>
-      <tr class="stoich-row"><td>Typical $r$</td><td>8–12</td><td>14–22</td></tr>
-      <tr><td>Fuel type</td><td>Petrol/Gasoline</td><td>Diesel</td></tr>
-      <tr class="stoich-row"><td>Heat input formula</td><td>$Q_{in}=mc_v(T_3-T_2)$</td><td>$Q_{in}=mc_p(T_3-T_2)$</td></tr>
-    </tbody>
-  </table>
-</div>
-
-
-<!-- ══ FUEL-AIR MIXTURE ══ -->
-<div id="fuel-air" class="section-header">
-  <div class="section-icon icon-green">⛽</div>
-  <div>
-    <h2>Fuel–Air Mixture Concepts</h2>
-    <div class="sub">AFR · Equivalence Ratio · Lean & Rich Mixtures</div>
-  </div>
-</div>
-
-<div class="card">
-  <h3>⚖️ Air-Fuel Ratio (AFR) & Equivalence Ratio (φ)</h3>
-  <div class="grid-2">
-    <div>
-      <div class="formula-box">
-        <div class="formula-label">Air-Fuel Ratio</div>
-        $$AFR = \frac{m_{air}}{m_{fuel}}$$
+        <h3>📏 Engine Calculations</h3>
+        <label class="study-label"><input type="checkbox" class="study-cb"> 📊 Calculate <strong>engine efficiency
+            (η)</strong></label>
+        <label class="study-label"><input type="checkbox" class="study-cb"> 📦 Practice <strong>engine volume
+            calculation</strong></label>
+        <label class="study-label"><input type="checkbox" class="study-cb"> 🧠 Understand <strong>swept volume vs
+            clearance volume</strong></label>
       </div>
-      <p style="font-size:13.5px;color:#6b5a3e;margin-top:8px;">Stoichiometric AFR for petrol: $\approx 14.7$ (meaning 14.7 kg air per 1 kg fuel).</p>
-    </div>
-    <div>
-      <div class="formula-box green">
-        <div class="formula-label green">Equivalence Ratio</div>
-        $$\phi = \frac{AFR_{stoich}}{AFR_{actual}}$$
+
+
+
+      <!-- ══ ENGINE CYCLES ══ -->
+      <div id="engine-cycles" class="section-header">
+        <div class="section-icon icon-amber">🔥</div>
+        <div>
+          <h2>Engine Cycles</h2>
+          <div class="sub">Otto Cycle (SI) · Diesel Cycle (CI) · PV Diagrams</div>
+        </div>
       </div>
-      <p style="font-size:13.5px;color:#6b5a3e;margin-top:8px;">$\phi = 1$: Stoichiometric. $\phi &lt; 1$: Lean. $\phi &gt; 1$: Rich.</p>
-    </div>
-  </div>
 
-  <h4 style="margin-top:18px;">Mixture Summary Table</h4>
-  <table class="mix-table">
-    <thead>
-      <tr><th>Mixture</th><th>AFR</th><th>φ value</th><th>Characteristic</th><th>Effect</th></tr>
-    </thead>
-    <tbody>
-      <tr class="lean-row">
-        <td><strong>🟢 Lean</strong></td>
-        <td>$AFR > 14.7$</td>
-        <td>$\phi < 1$</td>
-        <td>Excess air</td>
-        <td>Lower power, better fuel economy, ↑ NOx, ↓ CO</td>
-      </tr>
-      <tr class="stoich-row">
-        <td><strong>⚪ Stoich.</strong></td>
-        <td>$AFR = 14.7$</td>
-        <td>$\phi = 1$</td>
-        <td>Perfect ratio</td>
-        <td>Ideal combustion, catalyst works best</td>
-      </tr>
-      <tr class="rich-row">
-        <td><strong>🔴 Rich</strong></td>
-        <td>$AFR < 14.7$</td>
-        <td>$\phi > 1$</td>
-        <td>Excess fuel</td>
-        <td>Higher power, worse economy, ↑ CO, ↑ unburnt HC</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+      <div class="grid-2">
+        <!-- OTTO -->
+        <div class="card">
+          <h3>🔥 Otto Cycle <span style="font-size:12px;color:#6b5a3e;font-family:monospace;margin-left:6px;">(Spark
+              Ignition)</span></h3>
+          <p>Used in petrol/gasoline engines. Heat addition occurs at <strong>constant volume</strong> (isochoric).</p>
+          <div class="formula-box">
+            <div class="formula-label">Thermal Efficiency</div>
+            $$\eta_{Otto} = 1 - \frac{1}{r^{\gamma - 1}}$$
+          </div>
+          <h4>Key Parameters</h4>
+          <ul class="concept-list">
+            <li>$r$ = compression ratio $= V_1/V_2$</li>
+            <li>$\gamma$ = ratio of specific heats $= c_p/c_v \approx 1.4$ (air)</li>
+            <li>Typical $r$ for petrol engine: <strong>8 – 12</strong></li>
+          </ul>
+          <div class="callout">
+            <span class="callout-icon">💡</span>
+            <span class="callout-text"><strong>Higher compression ratio → Higher efficiency</strong>, but limited by
+              engine knock (auto-ignition).</span>
+          </div>
+        </div>
 
+        <!-- DIESEL -->
+        <div class="card">
+          <h3>🚜 Diesel Cycle <span
+              style="font-size:12px;color:#6b5a3e;font-family:monospace;margin-left:6px;">(Compression Ignition)</span>
+          </h3>
+          <p>Used in diesel engines. Heat addition at <strong>constant pressure</strong> (isobaric).</p>
+          <div class="formula-box blue">
+            <div class="formula-label blue">Thermal Efficiency</div>
+            $$\eta_{Diesel} = 1 - \frac{1}{r^{\gamma-1}} \cdot \frac{r_c^\gamma - 1}{\gamma(r_c - 1)}$$
+          </div>
+          <h4>Key Parameters</h4>
+          <ul class="concept-list">
+            <li>$r_c$ = cut-off ratio $= V_3/V_2$ (ratio of volume after/before combustion)</li>
+            <li>Typical $r$ for diesel engine: <strong>14 – 22</strong></li>
+            <li>As $r_c \to 1$, Diesel efficiency $\to$ Otto efficiency</li>
+          </ul>
+          <div class="callout blue">
+            <span class="callout-icon">💡</span>
+            <span class="callout-text"><strong>Higher $r$, lower $r_c$ → Higher Diesel efficiency.</strong> Diesel
+              engines are more efficient than Otto at same compression ratio.</span>
+          </div>
+        </div>
+      </div>
 
-<!-- ══ 4 STROKES ══ -->
-<div id="strokes" class="section-header">
-  <div class="section-icon icon-amber">🔁</div>
-  <div>
-    <h2>4 Strokes of IC Engine</h2>
-    <div class="sub">The complete operating cycle of a 4-stroke internal combustion engine</div>
-  </div>
-</div>
-
-<div class="card">
-  <div class="stroke-timeline">
-    <div class="stroke-item" data-num="1">
-      <div class="stroke-icon">🌬️</div>
-      <div class="stroke-name">Intake Stroke</div>
-      <div class="stroke-desc">Piston moves <strong>down</strong>. Intake valve opens. Air–fuel mixture drawn into cylinder.</div>
-    </div>
-    <div class="stroke-item" data-num="2">
-      <div class="stroke-icon">🗜️</div>
-      <div class="stroke-name">Compression Stroke</div>
-      <div class="stroke-desc">Piston moves <strong>up</strong>. Both valves closed. Mixture compressed. Temperature rises.</div>
-    </div>
-    <div class="stroke-item" data-num="3">
-      <div class="stroke-icon">💥</div>
-      <div class="stroke-name">Power Stroke</div>
-      <div class="stroke-desc">Spark plug fires. Combustion pushes piston <strong>down</strong>. This is the only stroke that produces work.</div>
-    </div>
-    <div class="stroke-item" data-num="4">
-      <div class="stroke-icon">💨</div>
-      <div class="stroke-name">Exhaust Stroke</div>
-      <div class="stroke-desc">Piston moves <strong>up</strong>. Exhaust valve opens. Burnt gases expelled from cylinder.</div>
-    </div>
-  </div>
-  <div class="callout" style="margin-top:14px;">
-    <span class="callout-icon">🔑</span>
-    <span class="callout-text"><strong>Mnemonic:</strong> <em>"I Can Power Everything"</em> — <strong>I</strong>ntake → <strong>C</strong>ompression → <strong>P</strong>ower → <strong>E</strong>xhaust</span>
-  </div>
-</div>
-
-
-<!-- ══ ENGINE CALCULATIONS ══ -->
-<div id="engine-calc" class="section-header">
-  <div class="section-icon icon-amber">📏</div>
-  <div>
-    <h2>Engine Calculations</h2>
-    <div class="sub">Efficiency · Swept Volume · Clearance Volume</div>
-  </div>
-</div>
-
-<div class="grid-2">
-  <div class="card">
-    <h3>📊 Engine Efficiency (η)</h3>
-    <div class="formula-box">
-      <div class="formula-label">Thermal Efficiency</div>
-      $$\eta_{th} = \frac{W_{net}}{Q_{in}} = 1 - \frac{Q_{out}}{Q_{in}}$$
-    </div>
-    <div class="formula-box" style="margin-top:10px;">
-      <div class="formula-label">Otto Efficiency</div>
-      $$\eta_{Otto} = 1 - r^{-(\ \gamma-1)}$$
-    </div>
-    <p style="margin-top:10px;font-size:13.5px;color:#6b5a3e;">Where $r$ = compression ratio and $\gamma \approx 1.4$ for air.</p>
-  </div>
-
-  <div class="card">
-    <h3>📦 Volume Calculations</h3>
-    <div class="formula-box green">
-      <div class="formula-label green">Swept Volume</div>
-      $$V_s = \frac{\pi}{4} D^2 L$$
-    </div>
-    <div class="formula-box" style="margin-top:10px;">
-      <div class="formula-label">Total Cylinder Volume</div>
-      $$V_{total} = V_s + V_c$$
-    </div>
-    <div class="formula-box blue" style="margin-top:10px;">
-      <div class="formula-label blue">Compression Ratio</div>
-      $$r = \frac{V_s + V_c}{V_c} = \frac{V_{BDC}}{V_{TDC}}$$
-    </div>
-  </div>
-</div>
-
-<div class="card">
-  <h3>🧠 Swept Volume vs Clearance Volume</h3>
-  <div class="grid-2">
-    <div>
-      <h4>Swept Volume ($V_s$)</h4>
-      <p>The volume swept by the piston as it travels from <strong>BDC</strong> (Bottom Dead Centre) to <strong>TDC</strong> (Top Dead Centre). Also called <em>displacement volume</em>.</p>
-      <ul class="concept-list" style="margin-top:8px;">
-        <li>$D$ = bore (cylinder diameter)</li>
-        <li>$L$ = stroke length</li>
-        <li>Determines engine displacement (e.g., 1.6L, 2.0L)</li>
-      </ul>
-    </div>
-    <div>
-      <h4>Clearance Volume ($V_c$)</h4>
-      <p>The volume remaining in the cylinder when piston is at <strong>TDC</strong> (fully compressed). This space cannot be swept by the piston.</p>
-      <ul class="concept-list" style="margin-top:8px;">
-        <li>Allows for proper valve clearance</li>
-        <li>Smaller $V_c$ → higher $r$ → higher efficiency</li>
-        <li>Too small $V_c$ → risk of engine knock</li>
-      </ul>
-    </div>
-  </div>
-</div>
+      <!-- PV DIAGRAM EXPLANATION -->
+      <div class="card">
+        <h3>📊 PV Diagrams — Otto vs Diesel</h3>
+        <div class="grid-2">
+          <div>
+            <h4>Otto PV Diagram (4 Processes)</h4>
+            <p style="font-size:13px;color:#6b5a3e;margin-bottom:10px;">State points: 1 → 2 → 3 → 4 → 1</p>
+            <svg viewBox="0 0 280 220"
+              style="width:100%;background:#fffdf8;border:1px solid var(--border);border-radius:8px;">
+              <!-- Axes -->
+              <line x1="40" y1="190" x2="260" y2="190" stroke="#ccc" stroke-width="1.5" />
+              <line x1="40" y1="10" x2="40" y2="190" stroke="#ccc" stroke-width="1.5" />
+              <text x="260" y="200" font-size="11" fill="#666" font-family="serif">V</text>
+              <text x="28" y="14" font-size="11" fill="#666" font-family="serif">P</text>
+              <!-- Otto Curve: 1→2 isentropic compression -->
+              <path d="M 200,170 Q 130,155 85,60" stroke="#d97706" stroke-width="2" fill="none" />
+              <!-- 2→3 isochoric heat addition -->
+              <line x1="85" y1="60" x2="85" y2="22" stroke="#dc2626" stroke-width="2" />
+              <!-- 3→4 isentropic expansion -->
+              <path d="M 85,22 Q 140,40 200,80" stroke="#d97706" stroke-width="2" fill="none" />
+              <!-- 4→1 isochoric heat rejection -->
+              <line x1="200" y1="80" x2="200" y2="170" stroke="#3b82f6" stroke-width="2" />
+              <!-- Shaded area -->
+              <path d="M 200,170 Q 130,155 85,60 L 85,22 Q 140,40 200,80 Z" fill="rgba(217,119,6,0.1)" />
+              <!-- Labels -->
+              <text x="196" y="184" font-size="10" fill="#333" font-family="serif">1</text>
+              <text x="78" y="56" font-size="10" fill="#333" font-family="serif">2</text>
+              <text x="78" y="20" font-size="10" fill="#333" font-family="serif">3</text>
+              <text x="196" y="76" font-size="10" fill="#333" font-family="serif">4</text>
+              <!-- Process labels -->
+              <text x="120" y="148" font-size="9" fill="#d97706" font-family="monospace">Isentropic</text>
+              <text x="55" y="44" font-size="9" fill="#dc2626" font-family="monospace">Isochoric</text>
+              <text x="130" y="26" font-size="9" fill="#d97706" font-family="monospace">Isentropic</text>
+              <text x="204" y="128" font-size="9" fill="#3b82f6" font-family="monospace">Isochoric</text>
+            </svg>
+          </div>
+          <div>
+            <h4>Diesel PV Diagram (4 Processes)</h4>
+            <p style="font-size:13px;color:#6b5a3e;margin-bottom:10px;">State points: 1 → 2 → 3 → 4 → 1</p>
+            <svg viewBox="0 0 280 220"
+              style="width:100%;background:#fffdf8;border:1px solid var(--border);border-radius:8px;">
+              <line x1="40" y1="190" x2="260" y2="190" stroke="#ccc" stroke-width="1.5" />
+              <line x1="40" y1="10" x2="40" y2="190" stroke="#ccc" stroke-width="1.5" />
+              <text x="260" y="200" font-size="11" fill="#666" font-family="serif">V</text>
+              <text x="28" y="14" font-size="11" fill="#666" font-family="serif">P</text>
+              <!-- 1→2 isentropic compression -->
+              <path d="M 200,170 Q 120,155 80,48" stroke="#1d4ed8" stroke-width="2" fill="none" />
+              <!-- 2→3 isobaric heat addition (horizontal) -->
+              <line x1="80" y1="48" x2="115" y2="48" stroke="#dc2626" stroke-width="2" />
+              <!-- 3→4 isentropic expansion -->
+              <path d="M 115,48 Q 160,65 200,95" stroke="#1d4ed8" stroke-width="2" fill="none" />
+              <!-- 4→1 isochoric heat rejection -->
+              <line x1="200" y1="95" x2="200" y2="170" stroke="#6b7280" stroke-width="2" />
+              <!-- Shaded area -->
+              <path d="M 200,170 Q 120,155 80,48 L 115,48 Q 160,65 200,95 Z" fill="rgba(29,78,216,0.1)" />
+              <!-- Labels -->
+              <text x="196" y="184" font-size="10" fill="#333" font-family="serif">1</text>
+              <text x="73" y="44" font-size="10" fill="#333" font-family="serif">2</text>
+              <text x="112" y="44" font-size="10" fill="#333" font-family="serif">3</text>
+              <text x="196" y="92" font-size="10" fill="#333" font-family="serif">4</text>
+              <!-- Labels -->
+              <text x="105" y="148" font-size="9" fill="#1d4ed8" font-family="monospace">Isentropic</text>
+              <text x="80" y="40" font-size="9" fill="#dc2626" font-family="monospace">Isobaric</text>
+              <text x="130" y="55" font-size="9" fill="#1d4ed8" font-family="monospace">Isentropic</text>
+              <text x="204" y="136" font-size="9" fill="#6b7280" font-family="monospace">Isochoric</text>
+            </svg>
+          </div>
+        </div>
+      </div>
 
 
-<!-- ══════════════════════════════════════════
+      <!-- ══ PV CALCULATION TABLE ══ -->
+      <div id="pv-table" class="section-header">
+        <div class="section-icon icon-amber">📈</div>
+        <div>
+          <h2>PV Calculation Formulas — All 4 Steps</h2>
+          <div class="sub">Otto (isochoric combustion) vs Diesel (isobaric combustion)</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🔥 Otto Cycle — State-by-State T & P Formulas</h3>
+        <table class="pv-table">
+          <thead>
+            <tr>
+              <th>Step</th>
+              <th>Process</th>
+              <th>Temperature $T$</th>
+              <th>Pressure $P$</th>
+              <th>Volume</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="step-num">1 → 2</td>
+              <td class="process-name">Isentropic<br /><span style="font-size:11px;color:#666;">Compression</span></td>
+              <td class="otto-col">$T_2 = T_1 \cdot r^{\gamma-1}$</td>
+              <td class="otto-col">$P_2 = P_1 \cdot r^{\gamma}$</td>
+              <td>$V_2 = V_1/r$</td>
+            </tr>
+            <tr>
+              <td class="step-num">2 → 3</td>
+              <td class="process-name">Isochoric<br /><span style="font-size:11px;color:#666;">Heat Addition</span></td>
+              <td class="otto-col">$T_3 = \dfrac{P_3}{P_2} \cdot T_2$</td>
+              <td class="otto-col">$P_3 = \dfrac{T_3}{T_2} \cdot P_2$</td>
+              <td>$V_3 = V_2$ <span style="font-size:11px;color:#999;">(const)</span></td>
+            </tr>
+            <tr>
+              <td class="step-num">3 → 4</td>
+              <td class="process-name">Isentropic<br /><span style="font-size:11px;color:#666;">Expansion</span></td>
+              <td class="otto-col">$T_4 = T_3 \cdot \dfrac{1}{r^{\gamma-1}}$</td>
+              <td class="otto-col">$P_4 = P_3 \cdot \dfrac{1}{r^{\gamma}}$</td>
+              <td>$V_4 = V_1$</td>
+            </tr>
+            <tr>
+              <td class="step-num">4 → 1</td>
+              <td class="process-name">Isochoric<br /><span style="font-size:11px;color:#666;">Heat Rejection</span>
+              </td>
+              <td class="otto-col">$T_1$ (given / initial)</td>
+              <td class="otto-col">$P_1$ (given / initial)</td>
+              <td>$V_1 = V_4$ <span style="font-size:11px;color:#999;">(const)</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="callout" style="margin-top:14px;">
+          <span class="callout-icon">📌</span>
+          <span class="callout-text">For Otto: $\dfrac{T_3}{T_2} = \dfrac{P_3}{P_2}$ (constant volume, ideal gas law).
+            Also note: $T_2/T_1 = T_3/T_4$ (symmetric isentropic processes).</span>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:20px;">
+        <h3>🚜 Diesel Cycle — State-by-State T & P Formulas</h3>
+        <table class="pv-table">
+          <thead>
+            <tr>
+              <th>Step</th>
+              <th>Process</th>
+              <th>Temperature $T$</th>
+              <th>Pressure $P$</th>
+              <th>Volume</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="step-num">1 → 2</td>
+              <td class="process-name">Isentropic<br /><span style="font-size:11px;color:#666;">Compression</span></td>
+              <td class="diesel-col">$T_2 = T_1 \cdot r^{\gamma-1}$</td>
+              <td class="diesel-col">$P_2 = P_1 \cdot r^{\gamma}$</td>
+              <td>$V_2 = V_1/r$</td>
+            </tr>
+            <tr>
+              <td class="step-num">2 → 3</td>
+              <td class="process-name">Isobaric<br /><span style="font-size:11px;color:#666;">Heat Addition</span></td>
+              <td class="diesel-col">$T_3 = T_2 \cdot r_c$</td>
+              <td class="diesel-col">$P_3 = P_2$ <span style="font-size:11px;color:#999;">(const)</span></td>
+              <td>$V_3 = r_c \cdot V_2$</td>
+            </tr>
+            <tr>
+              <td class="step-num">3 → 4</td>
+              <td class="process-name">Isentropic<br /><span style="font-size:11px;color:#666;">Expansion</span></td>
+              <td class="diesel-col">$T_4 = T_3 \left(\dfrac{r_c}{r}\right)^{\gamma-1}$</td>
+              <td class="diesel-col">$P_4 = P_3 \left(\dfrac{V_3}{V_4}\right)^{\gamma}$</td>
+              <td>$V_4 = V_1$</td>
+            </tr>
+            <tr>
+              <td class="step-num">4 → 1</td>
+              <td class="process-name">Isochoric<br /><span style="font-size:11px;color:#666;">Heat Rejection</span>
+              </td>
+              <td class="diesel-col">$T_1$ (given / initial)</td>
+              <td class="diesel-col">$P_1$ (given / initial)</td>
+              <td>$V_1 = V_4$ <span style="font-size:11px;color:#999;">(const)</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="callout blue" style="margin-top:14px;">
+          <span class="callout-icon">📌</span>
+          <span class="callout-text">For Diesel step 2→3 (isobaric): Use <strong>$T_3/T_2 = V_3/V_2 = r_c$</strong>
+            (ideal gas at constant pressure). The cut-off ratio $r_c = V_3/V_2 &gt; 1$.</span>
+        </div>
+
+        <!-- Side-by-side comparison -->
+        <h4 style="margin-top:18px;">Key Difference: Otto vs Diesel Combustion</h4>
+        <table class="mix-table">
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>Otto Cycle</th>
+              <th>Diesel Cycle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="stoich-row">
+              <td>Combustion type</td>
+              <td>Isochoric (const. $V$)</td>
+              <td>Isobaric (const. $P$)</td>
+            </tr>
+            <tr>
+              <td>Ignition method</td>
+              <td>Spark plug</td>
+              <td>Compression heat</td>
+            </tr>
+            <tr class="stoich-row">
+              <td>Typical $r$</td>
+              <td>8–12</td>
+              <td>14–22</td>
+            </tr>
+            <tr>
+              <td>Fuel type</td>
+              <td>Petrol/Gasoline</td>
+              <td>Diesel</td>
+            </tr>
+            <tr class="stoich-row">
+              <td>Heat input formula</td>
+              <td>$Q_{in}=mc_v(T_3-T_2)$</td>
+              <td>$Q_{in}=mc_p(T_3-T_2)$</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+      <!-- ══ FUEL-AIR MIXTURE ══ -->
+      <div id="fuel-air" class="section-header">
+        <div class="section-icon icon-green">⛽</div>
+        <div>
+          <h2>Fuel–Air Mixture Concepts</h2>
+          <div class="sub">AFR · Equivalence Ratio · Lean & Rich Mixtures</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>⚖️ Air-Fuel Ratio (AFR) & Equivalence Ratio (φ)</h3>
+        <div class="grid-2">
+          <div>
+            <div class="formula-box">
+              <div class="formula-label">Air-Fuel Ratio</div>
+              $$AFR = \frac{m_{air}}{m_{fuel}}$$
+            </div>
+            <p style="font-size:13.5px;color:#6b5a3e;margin-top:8px;">Stoichiometric AFR for petrol: $\approx 14.7$
+              (meaning 14.7 kg air per 1 kg fuel).</p>
+          </div>
+          <div>
+            <div class="formula-box green">
+              <div class="formula-label green">Equivalence Ratio</div>
+              $$\phi = \frac{AFR_{stoich}}{AFR_{actual}}$$
+            </div>
+            <p style="font-size:13.5px;color:#6b5a3e;margin-top:8px;">$\phi = 1$: Stoichiometric. $\phi &lt; 1$: Lean.
+              $\phi &gt; 1$: Rich.</p>
+          </div>
+        </div>
+
+        <h4 style="margin-top:18px;">Mixture Summary Table</h4>
+        <table class="mix-table">
+          <thead>
+            <tr>
+              <th>Mixture</th>
+              <th>AFR</th>
+              <th>φ value</th>
+              <th>Characteristic</th>
+              <th>Effect</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="lean-row">
+              <td><strong>🟢 Lean</strong></td>
+              <td>$AFR > 14.7$</td>
+              <td>$\phi < 1$</td>
+              <td>Excess air</td>
+              <td>Lower power, better fuel economy, ↑ NOx, ↓ CO</td>
+            </tr>
+            <tr class="stoich-row">
+              <td><strong>⚪ Stoich.</strong></td>
+              <td>$AFR = 14.7$</td>
+              <td>$\phi = 1$</td>
+              <td>Perfect ratio</td>
+              <td>Ideal combustion, catalyst works best</td>
+            </tr>
+            <tr class="rich-row">
+              <td><strong>🔴 Rich</strong></td>
+              <td>$AFR < 14.7$</td>
+              <td>$\phi > 1$</td>
+              <td>Excess fuel</td>
+              <td>Higher power, worse economy, ↑ CO, ↑ unburnt HC</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+      <!-- ══ 4 STROKES ══ -->
+      <div id="strokes" class="section-header">
+        <div class="section-icon icon-amber">🔁</div>
+        <div>
+          <h2>4 Strokes of IC Engine</h2>
+          <div class="sub">The complete operating cycle of a 4-stroke internal combustion engine</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="stroke-timeline">
+          <div class="stroke-item" data-num="1">
+            <div class="stroke-icon">🌬️</div>
+            <div class="stroke-name">Intake Stroke</div>
+            <div class="stroke-desc">Piston moves <strong>down</strong>. Intake valve opens. Air–fuel mixture drawn into
+              cylinder.</div>
+          </div>
+          <div class="stroke-item" data-num="2">
+            <div class="stroke-icon">🗜️</div>
+            <div class="stroke-name">Compression Stroke</div>
+            <div class="stroke-desc">Piston moves <strong>up</strong>. Both valves closed. Mixture compressed.
+              Temperature rises.</div>
+          </div>
+          <div class="stroke-item" data-num="3">
+            <div class="stroke-icon">💥</div>
+            <div class="stroke-name">Power Stroke</div>
+            <div class="stroke-desc">Spark plug fires. Combustion pushes piston <strong>down</strong>. This is the only
+              stroke that produces work.</div>
+          </div>
+          <div class="stroke-item" data-num="4">
+            <div class="stroke-icon">💨</div>
+            <div class="stroke-name">Exhaust Stroke</div>
+            <div class="stroke-desc">Piston moves <strong>up</strong>. Exhaust valve opens. Burnt gases expelled from
+              cylinder.</div>
+          </div>
+        </div>
+        <div class="callout" style="margin-top:14px;">
+          <span class="callout-icon">🔑</span>
+          <span class="callout-text"><strong>Mnemonic:</strong> <em>"I Can Power Everything"</em> —
+            <strong>I</strong>ntake → <strong>C</strong>ompression → <strong>P</strong>ower →
+            <strong>E</strong>xhaust</span>
+        </div>
+      </div>
+
+
+      <!-- ══ ENGINE CALCULATIONS ══ -->
+      <div id="engine-calc" class="section-header">
+        <div class="section-icon icon-amber">📏</div>
+        <div>
+          <h2>Engine Calculations</h2>
+          <div class="sub">Efficiency · Swept Volume · Clearance Volume</div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>📊 Engine Efficiency (η)</h3>
+          <div class="formula-box">
+            <div class="formula-label">Thermal Efficiency</div>
+            $$\eta_{th} = \frac{W_{net}}{Q_{in}} = 1 - \frac{Q_{out}}{Q_{in}}$$
+          </div>
+          <div class="formula-box" style="margin-top:10px;">
+            <div class="formula-label">Otto Efficiency</div>
+            $$\eta_{Otto} = 1 - r^{-(\ \gamma-1)}$$
+          </div>
+          <p style="margin-top:10px;font-size:13.5px;color:#6b5a3e;">Where $r$ = compression ratio and $\gamma \approx
+            1.4$ for air.</p>
+        </div>
+
+        <div class="card">
+          <h3>📦 Volume Calculations</h3>
+          <div class="formula-box green">
+            <div class="formula-label green">Swept Volume</div>
+            $$V_s = \frac{\pi}{4} D^2 L$$
+          </div>
+          <div class="formula-box" style="margin-top:10px;">
+            <div class="formula-label">Total Cylinder Volume</div>
+            $$V_{total} = V_s + V_c$$
+          </div>
+          <div class="formula-box blue" style="margin-top:10px;">
+            <div class="formula-label blue">Compression Ratio</div>
+            $$r = \frac{V_s + V_c}{V_c} = \frac{V_{BDC}}{V_{TDC}}$$
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🧠 Swept Volume vs Clearance Volume</h3>
+        <div class="grid-2">
+          <div>
+            <h4>Swept Volume ($V_s$)</h4>
+            <p>The volume swept by the piston as it travels from <strong>BDC</strong> (Bottom Dead Centre) to
+              <strong>TDC</strong> (Top Dead Centre). Also called <em>displacement volume</em>.</p>
+            <ul class="concept-list" style="margin-top:8px;">
+              <li>$D$ = bore (cylinder diameter)</li>
+              <li>$L$ = stroke length</li>
+              <li>Determines engine displacement (e.g., 1.6L, 2.0L)</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Clearance Volume ($V_c$)</h4>
+            <p>The volume remaining in the cylinder when piston is at <strong>TDC</strong> (fully compressed). This
+              space cannot be swept by the piston.</p>
+            <ul class="concept-list" style="margin-top:8px;">
+              <li>Allows for proper valve clearance</li>
+              <li>Smaller $V_c$ → higher $r$ → higher efficiency</li>
+              <li>Too small $V_c$ → risk of engine knock</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+    </div><!-- end section-a-content -->
+
+    <!-- ══════════════════════════════════════════
      SECTION B BANNER
 ══════════════════════════════════════════ -->
-<div class="section-banner banner-b">🅱️ Section B — Thermodynamics & Applications</div>
+    <div class="section-banner banner-b" id="banner-b" onclick="toggleSection('section-b-content', 'banner-b')">🅱️
+      Section B — Thermodynamics & Applications</div>
+    <div id="section-b-content" class="section-content">
 
+      <div class="checklist-card">
+        <h3>🌡️ Thermodynamics</h3>
+        <label class="study-label"><input type="checkbox" class="study-cb"> 📘 Study <strong>Zeroth Law of
+            Thermodynamics</strong></label>
+        <label class="study-label"><input type="checkbox" class="study-cb"> 📘 Study <strong>First Law of
+            Thermodynamics</strong></label>
+        <label class="study-label"><input type="checkbox" class="study-cb"> 📘 Study <strong>Second Law of
+            Thermodynamics</strong></label>
 
-<!-- ══ THERMODYNAMIC LAWS ══ -->
-<div id="laws" class="section-header">
-  <div class="section-icon icon-blue">🌡️</div>
-  <div>
-    <h2>Laws of Thermodynamics</h2>
-    <div class="sub">Zeroth · First · Second — Foundations of energy science</div>
-  </div>
-</div>
+        <h3>⚡ Energy Sources</h3>
+        <label class="study-label"><input type="checkbox" class="study-cb"> ☀️ Renewable energy sources</label>
+        <label class="study-label"><input type="checkbox" class="study-cb"> 🛢️ Non-renewable energy sources</label>
+        <label class="study-label"><input type="checkbox" class="study-cb"> ⚙️ Applications in mechanical
+          engineering</label>
 
-<div class="grid-3">
-  <div class="law-card law-0">
-    <div class="law-num">0</div>
-    <h3>Zeroth Law</h3>
-    <p style="font-size:14px;color:#6b5a3e;margin-top:8px;">If two systems are each in thermal equilibrium with a third system, they are in thermal equilibrium with each other.</p>
-    <div class="formula-box" style="margin-top:12px;background:rgba(255,255,255,0.6);border-color:#fde047;">
-      <div class="formula-label">Implication</div>
-      $$A \leftrightarrow C, \; B \leftrightarrow C \implies A \leftrightarrow B$$
-    </div>
-    <div class="callout" style="margin-top:10px;background:rgba(255,255,255,0.5);">
-      <span class="callout-icon">🌡️</span>
-      <span class="callout-text" style="font-size:12px;">This law is the <strong>basis for temperature measurement</strong> (thermometers).</span>
-    </div>
-  </div>
+        <h3>🌫️ Engine Emissions & Combustion Issues</h3>
+        <label class="study-label"><input type="checkbox" class="study-cb"> 🚗 Major emissions from <strong>Internal
+            Combustion Engine</strong></label>
+        <label class="study-label"><input type="checkbox" class="study-cb"> 🌫️ Causes of <strong>CO
+            emission</strong></label>
+        <label class="study-label"><input type="checkbox" class="study-cb"> ☁️ Causes of <strong>NOx
+            emission</strong></label>
+        <label class="study-label"><input type="checkbox" class="study-cb"> 🌑 Causes of <strong>unburnt
+            hydrocarbons</strong></label>
+        <label class="study-label"><input type="checkbox" class="study-cb"> 🔥 Understand <strong>engine
+            knocking</strong></label>
 
-  <div class="law-card law-1">
-    <div class="law-num">1</div>
-    <h3>First Law</h3>
-    <p style="font-size:14px;color:#6b5a3e;margin-top:8px;"><strong>Energy cannot be created or destroyed</strong>, only converted from one form to another.</p>
-    <div class="formula-box" style="margin-top:12px;background:rgba(255,255,255,0.6);border-color:#fb923c;">
-      <div class="formula-label">Mathematical Form</div>
-      $$\Delta U = Q - W$$
-    </div>
-    <ul class="concept-list" style="margin-top:8px;font-size:13px;">
-      <li>$\Delta U$ = change in internal energy</li>
-      <li>$Q$ = heat added to system</li>
-      <li>$W$ = work done by system</li>
-    </ul>
-    <div class="callout" style="margin-top:10px;background:rgba(255,255,255,0.5);border-color:#fed7aa;">
-      <span class="callout-icon">⚡</span>
-      <span class="callout-text" style="font-size:12px;"><strong>Conservation of energy</strong> — no perpetual motion machine of 1st kind is possible.</span>
-    </div>
-  </div>
+        <h3>📐 Numerical Problems</h3>
+        <label class="study-label"><input type="checkbox" class="study-cb"> 🔢 Practice <strong>gear ratio
+            calculations</strong></label>
+        <label class="study-label"><input type="checkbox" class="study-cb"> ⚖️ Practice <strong>AFR
+            calculations</strong></label>
+        <label class="study-label"><input type="checkbox" class="study-cb"> 🔬 Practice <strong>equivalence ratio (φ)
+            calculations</strong></label>
 
-  <div class="law-card law-2">
-    <div class="law-num">2</div>
-    <h3>Second Law</h3>
-    <p style="font-size:14px;color:#6b5a3e;margin-top:8px;">Heat spontaneously flows from <strong>hot to cold</strong>. Entropy of an isolated system never decreases.</p>
-    <div class="formula-box" style="margin-top:12px;background:rgba(255,255,255,0.6);border-color:#4ade80;">
-      <div class="formula-label">Entropy</div>
-      $$\Delta S \geq \frac{Q}{T} \quad \text{(Clausius)}$$
-    </div>
-    <div class="callout green" style="margin-top:10px;background:rgba(255,255,255,0.5);border-color:#86efac;">
-      <span class="callout-icon">♻️</span>
-      <span class="callout-text" style="font-size:12px;"><strong>No heat engine can be 100% efficient</strong> — no perpetual motion machine of 2nd kind.</span>
-    </div>
-  </div>
-</div>
-
-
-<!-- ══ ENERGY SOURCES ══ -->
-<div id="energy" class="section-header">
-  <div class="section-icon icon-green">⚡</div>
-  <div>
-    <h2>Energy Sources</h2>
-    <div class="sub">Renewable · Non-Renewable · Mechanical Engineering Applications</div>
-  </div>
-</div>
-
-<div class="energy-grid">
-  <div class="energy-card energy-re">
-    <h4>☀️ Renewable Energy Sources</h4>
-    <div class="energy-item">☀️ <span><strong>Solar energy</strong> — photovoltaic, solar thermal</span></div>
-    <div class="energy-item">💨 <span><strong>Wind energy</strong> — wind turbines</span></div>
-    <div class="energy-item">💧 <span><strong>Hydropower</strong> — dams, tidal energy</span></div>
-    <div class="energy-item">🌱 <span><strong>Biomass</strong> — biofuels, biogas</span></div>
-    <div class="energy-item">🌋 <span><strong>Geothermal</strong> — earth's heat</span></div>
-    <div style="margin-top:12px;font-size:13px;color:#166534;background:rgba(255,255,255,0.5);padding:8px 10px;border-radius:6px;">
-      ✅ Replenished naturally · Low carbon emissions · Sustainable long-term
-    </div>
-  </div>
-
-  <div class="energy-card energy-nre">
-    <h4>🛢️ Non-Renewable Energy Sources</h4>
-    <div class="energy-item">🛢️ <span><strong>Petroleum / Oil</strong> — petrol, diesel, kerosene</span></div>
-    <div class="energy-item">⛏️ <span><strong>Coal</strong> — thermal power plants</span></div>
-    <div class="energy-item">🔵 <span><strong>Natural gas</strong> — CNG, LNG</span></div>
-    <div class="energy-item">☢️ <span><strong>Nuclear</strong> — uranium fission (debated)</span></div>
-    <div style="margin-top:12px;font-size:13px;color:#78350f;background:rgba(255,255,255,0.5);padding:8px 10px;border-radius:6px;">
-      ⚠️ Finite reserves · High energy density · Major source of CO₂ emissions
-    </div>
-  </div>
-</div>
-
-<div class="card" style="margin-top:18px;">
-  <h3>⚙️ Applications in Mechanical Engineering</h3>
-  <div class="grid-3">
-    <div style="text-align:center;padding:14px;background:var(--amber-light);border-radius:8px;">
-      <div style="font-size:28px;margin-bottom:8px;">🔧</div>
-      <strong>Heat Engines</strong>
-      <p style="font-size:12px;color:#6b5a3e;margin-top:4px;">IC engines, steam turbines, gas turbines convert thermal to mechanical energy</p>
-    </div>
-    <div style="text-align:center;padding:14px;background:var(--blue-light);border-radius:8px;">
-      <div style="font-size:28px;margin-bottom:8px;">❄️</div>
-      <strong>Refrigeration</strong>
-      <p style="font-size:12px;color:#1e3a8a;margin-top:4px;">Vapour compression cycles, reverse heat engine operation</p>
-    </div>
-    <div style="text-align:center;padding:14px;background:var(--green-light);border-radius:8px;">
-      <div style="font-size:28px;margin-bottom:8px;">⚡</div>
-      <strong>Power Generation</strong>
-      <p style="font-size:12px;color:#166534;margin-top:4px;">Combined cycle plants, wind turbines, hydroelectric generators</p>
-    </div>
-  </div>
-</div>
-
-
-<!-- ══ EMISSIONS ══ -->
-<div id="emissions" class="section-header">
-  <div class="section-icon icon-red">🌫️</div>
-  <div>
-    <h2>Engine Emissions & Combustion Issues</h2>
-    <div class="sub">Major pollutants from IC engines · Causes · Effects</div>
-  </div>
-</div>
-
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;">
-  <div class="emission-card em-co">
-    <h4>💨 Carbon Monoxide (CO)</h4>
-    <p style="font-size:13.5px;color:#6b5a3e;margin-bottom:8px;">Colourless, odourless, toxic gas from <strong>incomplete combustion</strong>.</p>
-    <strong style="font-size:12px;color:#92400e;">Causes:</strong><br/>
-    <span class="cause-tag">Rich mixture (φ &gt; 1)</span>
-    <span class="cause-tag">Insufficient O₂</span>
-    <span class="cause-tag">Cold engine start</span>
-    <span class="cause-tag">Poor atomisation</span>
-    <div style="margin-top:10px;font-size:12px;background:rgba(255,255,255,0.6);padding:8px;border-radius:4px;">
-      <strong>Reaction:</strong> $2C + O_2 \to 2CO$ (instead of $CO_2$)
-    </div>
-  </div>
-
-  <div class="emission-card em-co2">
-    <h4>🌿 Carbon Dioxide (CO₂)</h4>
-    <p style="font-size:13.5px;color:#6b5a3e;margin-bottom:8px;">Product of <strong>complete combustion</strong>. Major greenhouse gas.</p>
-    <strong style="font-size:12px;color:#166534;">Causes:</strong><br/>
-    <span class="cause-tag" style="background:#dcfce7;color:#166534;">Complete combustion</span>
-    <span class="cause-tag" style="background:#dcfce7;color:#166534;">High fuel consumption</span>
-    <span class="cause-tag" style="background:#dcfce7;color:#166534;">Long engine runtime</span>
-    <div style="margin-top:10px;font-size:12px;background:rgba(255,255,255,0.6);padding:8px;border-radius:4px;">
-      <strong>Reaction:</strong> $C + O_2 \to CO_2$ (complete combustion)
-    </div>
-  </div>
-
-  <div class="emission-card em-nox">
-    <h4>☁️ Nitrogen Oxides (NOx)</h4>
-    <p style="font-size:13.5px;color:#6b5a3e;margin-bottom:8px;">NO and NO₂ formed at <strong>high temperatures</strong>. Causes smog and acid rain.</p>
-    <strong style="font-size:12px;color:#1e3a8a;">Causes:</strong><br/>
-    <span class="cause-tag" style="background:#dbeafe;color:#1e3a8a;">High combustion temp (&gt;1800K)</span>
-    <span class="cause-tag" style="background:#dbeafe;color:#1e3a8a;">Lean mixture</span>
-    <span class="cause-tag" style="background:#dbeafe;color:#1e3a8a;">High compression ratio</span>
-    <span class="cause-tag" style="background:#dbeafe;color:#1e3a8a;">Early ignition timing</span>
-    <div style="margin-top:10px;font-size:12px;background:rgba(255,255,255,0.6);padding:8px;border-radius:4px;">
-      <strong>Reaction:</strong> $N_2 + O_2 \xrightarrow{\text{high T}} 2NO$
-    </div>
-  </div>
-
-  <div class="emission-card em-hc">
-    <h4>🌑 Unburnt Hydrocarbons (HC)</h4>
-    <p style="font-size:13.5px;color:#6b5a3e;margin-bottom:8px;">Fuel that escapes combustion unreacted. Smells bad, causes smog.</p>
-    <strong style="font-size:12px;color:#7c3aed;">Causes:</strong><br/>
-    <span class="cause-tag" style="background:#ede9fe;color:#7c3aed;">Rich mixture</span>
-    <span class="cause-tag" style="background:#ede9fe;color:#7c3aed;">Misfires</span>
-    <span class="cause-tag" style="background:#ede9fe;color:#7c3aed;">Crevice volumes</span>
-    <span class="cause-tag" style="background:#ede9fe;color:#7c3aed;">Low temperature zones</span>
-    <span class="cause-tag" style="background:#ede9fe;color:#7c3aed;">Short-circuit (2-stroke)</span>
-  </div>
-
-  <div class="emission-card em-pm" style="grid-column: span 2;">
-    <h4>🌫️ Particulate Matter (PM)</h4>
-    <p style="font-size:13.5px;color:#374151;margin-bottom:8px;">Tiny solid/liquid particles — especially from <strong>diesel engines</strong> (soot). PM2.5 and PM10 are most harmful.</p>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;">
-      <div style="flex:1;min-width:180px;">
-        <strong style="font-size:12px;color:#374151;">Causes:</strong><br/>
-        <span class="cause-tag" style="background:#f3f4f6;color:#374151;">Incomplete combustion</span>
-        <span class="cause-tag" style="background:#f3f4f6;color:#374151;">Rich diesel mixture</span>
-        <span class="cause-tag" style="background:#f3f4f6;color:#374151;">High engine load</span>
-        <span class="cause-tag" style="background:#f3f4f6;color:#374151;">Old/worn engines</span>
+        <h3 style="margin-top:20px; color:var(--red-eng);">⭐ Important Exam Question</h3>
+        <label class="study-label"><input type="checkbox" class="study-cb"> ✍️ <strong>Write the major emissions of an
+            Internal Combustion Engine with reasons</strong></label>
+        <ul style="padding-left:42px; font-size:13px; color:#6b5a3e; margin-bottom:10px;">
+          <li>CO</li>
+          <li>CO₂</li>
+          <li>NOx</li>
+          <li>Unburnt Hydrocarbons</li>
+          <li>Particulate Matter</li>
+        </ul>
       </div>
-      <div style="flex:1;min-width:180px;background:rgba(255,255,255,0.6);padding:8px;border-radius:6px;font-size:12.5px;">
-        <strong>Health Effects:</strong> Respiratory diseases, cardiovascular problems, carcinogenic at high concentrations.
+
+
+      <!-- ══ THERMODYNAMIC LAWS ══ -->
+      <div id="laws" class="section-header">
+        <div class="section-icon icon-blue">🌡️</div>
+        <div>
+          <h2>Laws of Thermodynamics</h2>
+          <div class="sub">Zeroth · First · Second — Foundations of energy science</div>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
 
-<!-- Engine Knocking -->
-<div class="card">
-  <h3>🔥 Engine Knocking</h3>
-  <div class="grid-2">
-    <div>
-      <p>Engine knock (or <em>detonation</em>) occurs when the <strong>air-fuel mixture auto-ignites</strong> before the spark plug fires, causing a rapid, uncontrolled pressure rise.</p>
-      <h4 style="margin-top:14px;">Causes of Knocking</h4>
-      <ul class="concept-list">
-        <li>High compression ratio beyond fuel's octane rating</li>
-        <li>High intake air temperature</li>
-        <li>Advanced ignition timing</li>
-        <li>Low octane fuel (low anti-knock index)</li>
-        <li>Overheated engine / hot spots</li>
-      </ul>
-    </div>
-    <div>
-      <h4>Effects</h4>
-      <ul class="concept-list">
-        <li>Damage to piston, cylinder head, bearings</li>
-        <li>Characteristic metallic "pinging" sound</li>
-        <li>Reduced engine efficiency</li>
-        <li>Overheating of engine components</li>
-      </ul>
-      <div class="callout red" style="margin-top:12px;">
-        <span class="callout-icon">⚠️</span>
-        <span class="callout-text"><strong>Prevention:</strong> Use higher octane fuel · Retard ignition timing · Lower compression ratio · Engine cooling</span>
+      <div class="grid-3">
+        <div class="law-card law-0">
+          <div class="law-num">0</div>
+          <h3>Zeroth Law</h3>
+          <p style="font-size:14px;color:#6b5a3e;margin-top:8px;">If two systems are each in thermal equilibrium with a
+            third system, they are in thermal equilibrium with each other.</p>
+          <div class="formula-box" style="margin-top:12px;background:rgba(255,255,255,0.6);border-color:#fde047;">
+            <div class="formula-label">Implication</div>
+            $$A \leftrightarrow C, \; B \leftrightarrow C \implies A \leftrightarrow B$$
+          </div>
+          <div class="callout" style="margin-top:10px;background:rgba(255,255,255,0.5);">
+            <span class="callout-icon">🌡️</span>
+            <span class="callout-text" style="font-size:12px;">This law is the <strong>basis for temperature
+                measurement</strong> (thermometers).</span>
+          </div>
+        </div>
+
+        <div class="law-card law-1">
+          <div class="law-num">1</div>
+          <h3>First Law</h3>
+          <p style="font-size:14px;color:#6b5a3e;margin-top:8px;"><strong>Energy cannot be created or
+              destroyed</strong>, only converted from one form to another.</p>
+          <div class="formula-box" style="margin-top:12px;background:rgba(255,255,255,0.6);border-color:#fb923c;">
+            <div class="formula-label">Mathematical Form</div>
+            $$\Delta U = Q - W$$
+          </div>
+          <ul class="concept-list" style="margin-top:8px;font-size:13px;">
+            <li>$\Delta U$ = change in internal energy</li>
+            <li>$Q$ = heat added to system</li>
+            <li>$W$ = work done by system</li>
+          </ul>
+          <div class="callout" style="margin-top:10px;background:rgba(255,255,255,0.5);border-color:#fed7aa;">
+            <span class="callout-icon">⚡</span>
+            <span class="callout-text" style="font-size:12px;"><strong>Conservation of energy</strong> — no perpetual
+              motion machine of 1st kind is possible.</span>
+          </div>
+        </div>
+
+        <div class="law-card law-2">
+          <div class="law-num">2</div>
+          <h3>Second Law</h3>
+          <p style="font-size:14px;color:#6b5a3e;margin-top:8px;">Heat spontaneously flows from <strong>hot to
+              cold</strong>. Entropy of an isolated system never decreases.</p>
+          <div class="formula-box" style="margin-top:12px;background:rgba(255,255,255,0.6);border-color:#4ade80;">
+            <div class="formula-label">Entropy</div>
+            $$\Delta S \geq \frac{Q}{T} \quad \text{(Clausius)}$$
+          </div>
+          <div class="callout green" style="margin-top:10px;background:rgba(255,255,255,0.5);border-color:#86efac;">
+            <span class="callout-icon">♻️</span>
+            <span class="callout-text" style="font-size:12px;"><strong>No heat engine can be 100% efficient</strong> —
+              no perpetual motion machine of 2nd kind.</span>
+          </div>
+        </div>
       </div>
+
+
+      <!-- ══ ENERGY SOURCES ══ -->
+      <div id="energy" class="section-header">
+        <div class="section-icon icon-green">⚡</div>
+        <div>
+          <h2>Energy Sources</h2>
+          <div class="sub">Renewable · Non-Renewable · Mechanical Engineering Applications</div>
+        </div>
+      </div>
+
+      <div class="energy-grid">
+        <div class="energy-card energy-re">
+          <h4>☀️ Renewable Energy Sources</h4>
+          <div class="energy-item">☀️ <span><strong>Solar energy</strong> — photovoltaic, solar thermal</span></div>
+          <div class="energy-item">💨 <span><strong>Wind energy</strong> — wind turbines</span></div>
+          <div class="energy-item">💧 <span><strong>Hydropower</strong> — dams, tidal energy</span></div>
+          <div class="energy-item">🌱 <span><strong>Biomass</strong> — biofuels, biogas</span></div>
+          <div class="energy-item">🌋 <span><strong>Geothermal</strong> — earth's heat</span></div>
+          <div
+            style="margin-top:12px;font-size:13px;color:#166534;background:rgba(255,255,255,0.5);padding:8px 10px;border-radius:6px;">
+            ✅ Replenished naturally · Low carbon emissions · Sustainable long-term
+          </div>
+        </div>
+
+        <div class="energy-card energy-nre">
+          <h4>🛢️ Non-Renewable Energy Sources</h4>
+          <div class="energy-item">🛢️ <span><strong>Petroleum / Oil</strong> — petrol, diesel, kerosene</span></div>
+          <div class="energy-item">⛏️ <span><strong>Coal</strong> — thermal power plants</span></div>
+          <div class="energy-item">🔵 <span><strong>Natural gas</strong> — CNG, LNG</span></div>
+          <div class="energy-item">☢️ <span><strong>Nuclear</strong> — uranium fission (debated)</span></div>
+          <div
+            style="margin-top:12px;font-size:13px;color:#78350f;background:rgba(255,255,255,0.5);padding:8px 10px;border-radius:6px;">
+            ⚠️ Finite reserves · High energy density · Major source of CO₂ emissions
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:18px;">
+        <h3>⚙️ Applications in Mechanical Engineering</h3>
+        <div class="grid-3">
+          <div style="text-align:center;padding:14px;background:var(--amber-light);border-radius:8px;">
+            <div style="font-size:28px;margin-bottom:8px;">🔧</div>
+            <strong>Heat Engines</strong>
+            <p style="font-size:12px;color:#6b5a3e;margin-top:4px;">IC engines, steam turbines, gas turbines convert
+              thermal to mechanical energy</p>
+          </div>
+          <div style="text-align:center;padding:14px;background:var(--blue-light);border-radius:8px;">
+            <div style="font-size:28px;margin-bottom:8px;">❄️</div>
+            <strong>Refrigeration</strong>
+            <p style="font-size:12px;color:#1e3a8a;margin-top:4px;">Vapour compression cycles, reverse heat engine
+              operation</p>
+          </div>
+          <div style="text-align:center;padding:14px;background:var(--green-light);border-radius:8px;">
+            <div style="font-size:28px;margin-bottom:8px;">⚡</div>
+            <strong>Power Generation</strong>
+            <p style="font-size:12px;color:#166534;margin-top:4px;">Combined cycle plants, wind turbines, hydroelectric
+              generators</p>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ══ EMISSIONS ══ -->
+      <div id="emissions" class="section-header">
+        <div class="section-icon icon-red">🌫️</div>
+        <div>
+          <h2>Engine Emissions & Combustion Issues</h2>
+          <div class="sub">Major pollutants from IC engines · Causes · Effects</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;">
+        <div class="emission-card em-co">
+          <h4>💨 Carbon Monoxide (CO)</h4>
+          <p style="font-size:13.5px;color:#6b5a3e;margin-bottom:8px;">Colourless, odourless, toxic gas from
+            <strong>incomplete combustion</strong>.</p>
+          <strong style="font-size:12px;color:#92400e;">Causes:</strong><br />
+          <span class="cause-tag">Rich mixture (φ &gt; 1)</span>
+          <span class="cause-tag">Insufficient O₂</span>
+          <span class="cause-tag">Cold engine start</span>
+          <span class="cause-tag">Poor atomisation</span>
+          <div style="margin-top:10px;font-size:12px;background:rgba(255,255,255,0.6);padding:8px;border-radius:4px;">
+            <strong>Reaction:</strong> $2C + O_2 \to 2CO$ (instead of $CO_2$)
+          </div>
+        </div>
+
+        <div class="emission-card em-co2">
+          <h4>🌿 Carbon Dioxide (CO₂)</h4>
+          <p style="font-size:13.5px;color:#6b5a3e;margin-bottom:8px;">Product of <strong>complete combustion</strong>.
+            Major greenhouse gas.</p>
+          <strong style="font-size:12px;color:#166534;">Causes:</strong><br />
+          <span class="cause-tag" style="background:#dcfce7;color:#166534;">Complete combustion</span>
+          <span class="cause-tag" style="background:#dcfce7;color:#166534;">High fuel consumption</span>
+          <span class="cause-tag" style="background:#dcfce7;color:#166534;">Long engine runtime</span>
+          <div style="margin-top:10px;font-size:12px;background:rgba(255,255,255,0.6);padding:8px;border-radius:4px;">
+            <strong>Reaction:</strong> $C + O_2 \to CO_2$ (complete combustion)
+          </div>
+        </div>
+
+        <div class="emission-card em-nox">
+          <h4>☁️ Nitrogen Oxides (NOx)</h4>
+          <p style="font-size:13.5px;color:#6b5a3e;margin-bottom:8px;">NO and NO₂ formed at <strong>high
+              temperatures</strong>. Causes smog and acid rain.</p>
+          <strong style="font-size:12px;color:#1e3a8a;">Causes:</strong><br />
+          <span class="cause-tag" style="background:#dbeafe;color:#1e3a8a;">High combustion temp (&gt;1800K)</span>
+          <span class="cause-tag" style="background:#dbeafe;color:#1e3a8a;">Lean mixture</span>
+          <span class="cause-tag" style="background:#dbeafe;color:#1e3a8a;">High compression ratio</span>
+          <span class="cause-tag" style="background:#dbeafe;color:#1e3a8a;">Early ignition timing</span>
+          <div style="margin-top:10px;font-size:12px;background:rgba(255,255,255,0.6);padding:8px;border-radius:4px;">
+            <strong>Reaction:</strong> $N_2 + O_2 \xrightarrow{\text{high T}} 2NO$
+          </div>
+        </div>
+
+        <div class="emission-card em-hc">
+          <h4>🌑 Unburnt Hydrocarbons (HC)</h4>
+          <p style="font-size:13.5px;color:#6b5a3e;margin-bottom:8px;">Fuel that escapes combustion unreacted. Smells
+            bad, causes smog.</p>
+          <strong style="font-size:12px;color:#7c3aed;">Causes:</strong><br />
+          <span class="cause-tag" style="background:#ede9fe;color:#7c3aed;">Rich mixture</span>
+          <span class="cause-tag" style="background:#ede9fe;color:#7c3aed;">Misfires</span>
+          <span class="cause-tag" style="background:#ede9fe;color:#7c3aed;">Crevice volumes</span>
+          <span class="cause-tag" style="background:#ede9fe;color:#7c3aed;">Low temperature zones</span>
+          <span class="cause-tag" style="background:#ede9fe;color:#7c3aed;">Short-circuit (2-stroke)</span>
+        </div>
+
+        <div class="emission-card em-pm" style="grid-column: span 2;">
+          <h4>🌫️ Particulate Matter (PM)</h4>
+          <p style="font-size:13.5px;color:#374151;margin-bottom:8px;">Tiny solid/liquid particles — especially from
+            <strong>diesel engines</strong> (soot). PM2.5 and PM10 are most harmful.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <div style="flex:1;min-width:180px;">
+              <strong style="font-size:12px;color:#374151;">Causes:</strong><br />
+              <span class="cause-tag" style="background:#f3f4f6;color:#374151;">Incomplete combustion</span>
+              <span class="cause-tag" style="background:#f3f4f6;color:#374151;">Rich diesel mixture</span>
+              <span class="cause-tag" style="background:#f3f4f6;color:#374151;">High engine load</span>
+              <span class="cause-tag" style="background:#f3f4f6;color:#374151;">Old/worn engines</span>
+            </div>
+            <div
+              style="flex:1;min-width:180px;background:rgba(255,255,255,0.6);padding:8px;border-radius:6px;font-size:12.5px;">
+              <strong>Health Effects:</strong> Respiratory diseases, cardiovascular problems, carcinogenic at high
+              concentrations.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Engine Knocking -->
+      <div class="card">
+        <h3>🔥 Engine Knocking</h3>
+        <div class="grid-2">
+          <div>
+            <p>Engine knock (or <em>detonation</em>) occurs when the <strong>air-fuel mixture auto-ignites</strong>
+              before the spark plug fires, causing a rapid, uncontrolled pressure rise.</p>
+            <h4 style="margin-top:14px;">Causes of Knocking</h4>
+            <ul class="concept-list">
+              <li>High compression ratio beyond fuel's octane rating</li>
+              <li>High intake air temperature</li>
+              <li>Advanced ignition timing</li>
+              <li>Low octane fuel (low anti-knock index)</li>
+              <li>Overheated engine / hot spots</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Effects</h4>
+            <ul class="concept-list">
+              <li>Damage to piston, cylinder head, bearings</li>
+              <li>Characteristic metallic "pinging" sound</li>
+              <li>Reduced engine efficiency</li>
+              <li>Overheating of engine components</li>
+            </ul>
+            <div class="callout red" style="margin-top:12px;">
+              <span class="callout-icon">⚠️</span>
+              <span class="callout-text"><strong>Prevention:</strong> Use higher octane fuel · Retard ignition timing ·
+                Lower compression ratio · Engine cooling</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ══ GEAR RATIO NUMERICALS ══ -->
+      <div class="section-header" style="margin-top:40px;">
+        <div class="section-icon icon-purple">📐</div>
+        <div>
+          <h2>Numerical Problems — Quick Reference</h2>
+          <div class="sub">Gear Ratio · AFR · Equivalence Ratio — step-by-step approach</div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>🔢 Gear Ratio Calculation</h3>
+          <div class="formula-box">
+            <div class="formula-label">Gear Ratio</div>
+            $$GR = \frac{N_{driven}}{N_{driver}} = \frac{\omega_{driver}}{\omega_{driven}} =
+            \frac{T_{driven}}{T_{driver}}$$
+          </div>
+          <h4 style="margin-top:14px;">Example</h4>
+          <p style="font-size:13.5px;color:#6b5a3e;">Driver gear: 20 teeth, Driven gear: 60 teeth</p>
+          <div class="formula-box" style="margin-top:8px;background:#fffbf0;">
+            $$GR = \frac{60}{20} = 3 \quad \text{(3:1 reduction)}$$
+          </div>
+          <p style="font-size:13px;color:#6b5a3e;margin-top:8px;">Output torque = 3× input torque. Output speed = ⅓
+            input speed.</p>
+        </div>
+
+        <div class="card">
+          <h3>⚖️ AFR & φ Calculations</h3>
+          <div class="formula-box">
+            <div class="formula-label">AFR from masses</div>
+            $$AFR = \frac{m_{air}}{m_{fuel}}$$
+          </div>
+          <div class="formula-box green" style="margin-top:10px;">
+            <div class="formula-label green">Equivalence Ratio</div>
+            $$\phi = \frac{AFR_{stoich}}{AFR_{actual}} = \frac{14.7}{AFR_{actual}}$$
+          </div>
+          <h4 style="margin-top:14px;">Example</h4>
+          <p style="font-size:13.5px;color:#6b5a3e;">$m_{air} = 29.4\,\text{g}$, $m_{fuel} = 2\,\text{g}$</p>
+          <div class="formula-box" style="margin-top:8px;">
+            $$AFR = \frac{29.4}{2} = 14.7, \quad \phi = \frac{14.7}{14.7} = 1.0 \;\text{(Stoichiometric)}$$
+          </div>
+        </div>
+      </div>
+
+      <!-- Emissions summary table -->
+      <div class="card" style="margin-top:20px;">
+        <h3>✍️ Major IC Engine Emissions — Summary Table</h3>
+        <table class="pv-table">
+          <thead>
+            <tr>
+              <th>Emission</th>
+              <th>Type</th>
+              <th>Primary Cause</th>
+              <th>Mixture Condition</th>
+              <th>Reduce By</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>CO</strong></td>
+              <td>Gas</td>
+              <td>Incomplete combustion</td>
+              <td>Rich ($\phi > 1$)</td>
+              <td>Lean mixture, catalytic converter</td>
+            </tr>
+            <tr>
+              <td><strong>CO₂</strong></td>
+              <td>Gas</td>
+              <td>Complete combustion</td>
+              <td>All conditions</td>
+              <td>Fuel efficiency, electrification</td>
+            </tr>
+            <tr>
+              <td><strong>NOx</strong></td>
+              <td>Gas</td>
+              <td>High temp. N₂ + O₂ reaction</td>
+              <td>Lean, high-temp ($> 1800K$)</td>
+              <td>EGR, SCR, retard timing</td>
+            </tr>
+            <tr>
+              <td><strong>Unburnt HC</strong></td>
+              <td>Gas/Vapour</td>
+              <td>Incomplete combustion, misfires</td>
+              <td>Rich or cold engine</td>
+              <td>Better atomisation, catalytic converter</td>
+            </tr>
+            <tr>
+              <td><strong>PM / Soot</strong></td>
+              <td>Particles</td>
+              <td>Insufficient O₂ for diesel fuel</td>
+              <td>Rich diesel combustion</td>
+              <td>DPF, better fuel injection</td>
+            </tr>
+          </tbody>
+        </table>
+        <div
+          style="font-size:12px;color:#6b5a3e;margin-top:10px;padding:8px 12px;background:var(--amber-light);border-radius:6px;">
+          <strong>Key acronyms:</strong> EGR = Exhaust Gas Recirculation · SCR = Selective Catalytic Reduction · DPF =
+          Diesel Particulate Filter
+        </div>
+      </div>
+
+      <!-- ══ QUICK REFERENCE CARD ══ -->
+      <div class="card"
+        style="margin-top:30px;background:linear-gradient(135deg,#fffbf0,#fef9ec);border-color:#f0d080;">
+        <h3>🗂️ Symbol Reference Cheat Sheet</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:13px;">
+          <span style="background:#fff;padding:5px 12px;border-radius:4px;border:1px solid var(--border);">$r$ —
+            compression ratio</span>
+          <span style="background:#fff;padding:5px 12px;border-radius:4px;border:1px solid var(--border);">$r_c$ —
+            cut-off ratio (Diesel)</span>
+          <span style="background:#fff;padding:5px 12px;border-radius:4px;border:1px solid var(--border);">$\gamma$ —
+            ratio of specific heats ($c_p/c_v$)</span>
+          <span style="background:#fff;padding:5px 12px;border-radius:4px;border:1px solid var(--border);">$\phi$ —
+            equivalence ratio</span>
+          <span style="background:#fff;padding:5px 12px;border-radius:4px;border:1px solid var(--border);">$V_s$ — swept
+            (displacement) volume</span>
+          <span style="background:#fff;padding:5px 12px;border-radius:4px;border:1px solid var(--border);">$V_c$ —
+            clearance volume</span>
+          <span style="background:#fff;padding:5px 12px;border-radius:4px;border:1px solid var(--border);">$\eta$ —
+            thermal efficiency</span>
+          <span
+            style="background:#fff;padding:5px 12px;border-radius:4px;border:1px solid var(--border);">$T_1,T_2,T_3,T_4$
+            — state point temperatures</span>
+          <span
+            style="background:#fff;padding:5px 12px;border-radius:4px;border:1px solid var(--border);">$P_1,P_2,P_3,P_4$
+            — state point pressures</span>
+          <span style="background:#fff;padding:5px 12px;border-radius:4px;border:1px solid var(--border);">$c_v$ —
+            specific heat at const. volume</span>
+          <span style="background:#fff;padding:5px 12px;border-radius:4px;border:1px solid var(--border);">$c_p$ —
+            specific heat at const. pressure</span>
+          <span style="background:#fff;padding:5px 12px;border-radius:4px;border:1px solid var(--border);">BDC — Bottom
+            Dead Centre</span>
+          <span style="background:#fff;padding:5px 12px;border-radius:4px;border:1px solid var(--border);">TDC — Top
+            Dead Centre</span>
+        </div>
+      </div>
+
+    </div><!-- end section-b-content -->
+
+  </div><!-- end .container -->
+
+  <div class="progress-container">
+    <div class="progress-wrapper">
+      <div style="font-size:18px;">🏆</div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <div class="progress-text" id="progress-text">0%</div>
     </div>
-  </div>
-</div>
-
-
-<!-- ══ GEAR RATIO NUMERICALS ══ -->
-<div class="section-header" style="margin-top:40px;">
-  <div class="section-icon icon-purple">📐</div>
-  <div>
-    <h2>Numerical Problems — Quick Reference</h2>
-    <div class="sub">Gear Ratio · AFR · Equivalence Ratio — step-by-step approach</div>
-  </div>
-</div>
-
-<div class="grid-2">
-  <div class="card">
-    <h3>🔢 Gear Ratio Calculation</h3>
-    <div class="formula-box">
-      <div class="formula-label">Gear Ratio</div>
-      $$GR = \frac{N_{driven}}{N_{driver}} = \frac{\omega_{driver}}{\omega_{driven}} = \frac{T_{driven}}{T_{driver}}$$
-    </div>
-    <h4 style="margin-top:14px;">Example</h4>
-    <p style="font-size:13.5px;color:#6b5a3e;">Driver gear: 20 teeth, Driven gear: 60 teeth</p>
-    <div class="formula-box" style="margin-top:8px;background:#fffbf0;">
-      $$GR = \frac{60}{20} = 3 \quad \text{(3:1 reduction)}$$
-    </div>
-    <p style="font-size:13px;color:#6b5a3e;margin-top:8px;">Output torque = 3× input torque. Output speed = ⅓ input speed.</p>
+    <button class="btn-complete" onclick="markAllComplete()">✅ Mark as Complete</button>
   </div>
 
-  <div class="card">
-    <h3>⚖️ AFR & φ Calculations</h3>
-    <div class="formula-box">
-      <div class="formula-label">AFR from masses</div>
-      $$AFR = \frac{m_{air}}{m_{fuel}}$$
-    </div>
-    <div class="formula-box green" style="margin-top:10px;">
-      <div class="formula-label green">Equivalence Ratio</div>
-      $$\phi = \frac{AFR_{stoich}}{AFR_{actual}} = \frac{14.7}{AFR_{actual}}$$
-    </div>
-    <h4 style="margin-top:14px;">Example</h4>
-    <p style="font-size:13.5px;color:#6b5a3e;">$m_{air} = 29.4\,\text{g}$, $m_{fuel} = 2\,\text{g}$</p>
-    <div class="formula-box" style="margin-top:8px;">
-      $$AFR = \frac{29.4}{2} = 14.7, \quad \phi = \frac{14.7}{14.7} = 1.0 \;\text{(Stoichiometric)}$$
-    </div>
-  </div>
-</div>
+  <footer>
+    FUNDAMENTALS OF MECHANICAL ENGINEERING · STUDY NOTES · COMPILED WITH ❤️
+  </footer>
 
-<!-- Emissions summary table -->
-<div class="card" style="margin-top:20px;">
-  <h3>✍️ Major IC Engine Emissions — Summary Table</h3>
-  <table class="pv-table">
-    <thead>
-      <tr>
-        <th>Emission</th>
-        <th>Type</th>
-        <th>Primary Cause</th>
-        <th>Mixture Condition</th>
-        <th>Reduce By</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>CO</strong></td>
-        <td>Gas</td>
-        <td>Incomplete combustion</td>
-        <td>Rich ($\phi > 1$)</td>
-        <td>Lean mixture, catalytic converter</td>
-      </tr>
-      <tr>
-        <td><strong>CO₂</strong></td>
-        <td>Gas</td>
-        <td>Complete combustion</td>
-        <td>All conditions</td>
-        <td>Fuel efficiency, electrification</td>
-      </tr>
-      <tr>
-        <td><strong>NOx</strong></td>
-        <td>Gas</td>
-        <td>High temp. N₂ + O₂ reaction</td>
-        <td>Lean, high-temp ($> 1800K$)</td>
-        <td>EGR, SCR, retard timing</td>
-      </tr>
-      <tr>
-        <td><strong>Unburnt HC</strong></td>
-        <td>Gas/Vapour</td>
-        <td>Incomplete combustion, misfires</td>
-        <td>Rich or cold engine</td>
-        <td>Better atomisation, catalytic converter</td>
-      </tr>
-      <tr>
-        <td><strong>PM / Soot</strong></td>
-        <td>Particles</td>
-        <td>Insufficient O₂ for diesel fuel</td>
-        <td>Rich diesel combustion</td>
-        <td>DPF, better fuel injection</td>
-      </tr>
-    </tbody>
-  </table>
-  <div style="font-size:12px;color:#6b5a3e;margin-top:10px;padding:8px 12px;background:var(--amber-light);border-radius:6px;">
-    <strong>Key acronyms:</strong> EGR = Exhaust Gas Recirculation · SCR = Selective Catalytic Reduction · DPF = Diesel Particulate Filter
-  </div>
-</div>
+  <script>
+    function toggleSection(contentId, bannerId) {
+      const content = document.getElementById(contentId);
+      const banner = document.getElementById(bannerId);
+      content.classList.toggle('collapsed');
+      banner.classList.toggle('collapsed');
+    }
 
-<!-- ══ QUICK REFERENCE CARD ══ -->
-<div class="card" style="margin-top:30px;background:linear-gradient(135deg,#fffbf0,#fef9ec);border-color:#f0d080;">
-  <h3>🗂️ Symbol Reference Cheat Sheet</h3>
-  <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:13px;">
-    <span style="background:#fff;padding:5px 12px;border-radius:4px;border:1px solid var(--border);">$r$ — compression ratio</span>
-    <span style="background:#fff;padding:5px 12px;border-radius:4px;border:1px solid var(--border);">$r_c$ — cut-off ratio (Diesel)</span>
-    <span style="background:#fff;padding:5px 12px;border-radius:4px;border:1px solid var(--border);">$\gamma$ — ratio of specific heats ($c_p/c_v$)</span>
-    <span style="background:#fff;padding:5px 12px;border-radius:4px;border:1px solid var(--border);">$\phi$ — equivalence ratio</span>
-    <span style="background:#fff;padding:5px 12px;border-radius:4px;border:1px solid var(--border);">$V_s$ — swept (displacement) volume</span>
-    <span style="background:#fff;padding:5px 12px;border-radius:4px;border:1px solid var(--border);">$V_c$ — clearance volume</span>
-    <span style="background:#fff;padding:5px 12px;border-radius:4px;border:1px solid var(--border);">$\eta$ — thermal efficiency</span>
-    <span style="background:#fff;padding:5px 12px;border-radius:4px;border:1px solid var(--border);">$T_1,T_2,T_3,T_4$ — state point temperatures</span>
-    <span style="background:#fff;padding:5px 12px;border-radius:4px;border:1px solid var(--border);">$P_1,P_2,P_3,P_4$ — state point pressures</span>
-    <span style="background:#fff;padding:5px 12px;border-radius:4px;border:1px solid var(--border);">$c_v$ — specific heat at const. volume</span>
-    <span style="background:#fff;padding:5px 12px;border-radius:4px;border:1px solid var(--border);">$c_p$ — specific heat at const. pressure</span>
-    <span style="background:#fff;padding:5px 12px;border-radius:4px;border:1px solid var(--border);">BDC — Bottom Dead Centre</span>
-    <span style="background:#fff;padding:5px 12px;border-radius:4px;border:1px solid var(--border);">TDC — Top Dead Centre</span>
-  </div>
-</div>
+    const checkboxes = document.querySelectorAll('.study-cb');
+    const progressFill = document.getElementById('progress-fill');
+    const progressText = document.getElementById('progress-text');
 
-</div><!-- end .container -->
+    function updateProgress() {
+      let checkedCount = 0;
+      checkboxes.forEach(cb => {
+        if (cb.checked) {
+          checkedCount++;
+          cb.parentElement.classList.add('completed');
+        } else {
+          cb.parentElement.classList.remove('completed');
+        }
+      });
 
-<footer>
-  FUNDAMENTALS OF MECHANICAL ENGINEERING · STUDY NOTES · COMPILED WITH ❤️
-</footer>
+      const percentage = checkboxes.length === 0 ? 0 : Math.round((checkedCount / checkboxes.length) * 100);
+      progressFill.style.width = percentage + '%';
+      progressText.innerText = percentage + '%';
+
+      // Save to localStorage
+      const savedState = Array.from(checkboxes).map(cb => cb.checked);
+      localStorage.setItem('studyProgress', JSON.stringify(savedState));
+    }
+
+    function markAllComplete() {
+      checkboxes.forEach(cb => cb.checked = true);
+      updateProgress();
+    }
+
+    // Event Listeners
+    checkboxes.forEach(cb => {
+      cb.addEventListener('change', updateProgress);
+    });
+
+    // Load from localStorage
+    window.addEventListener('load', () => {
+      const savedState = JSON.parse(localStorage.getItem('studyProgress'));
+      if (savedState && savedState.length === checkboxes.length) {
+        checkboxes.forEach((cb, index) => {
+          cb.checked = savedState[index];
+        });
+      }
+      updateProgress();
+    });
+  </script>
 
 </body>
+
 </html>
